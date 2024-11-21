@@ -22,25 +22,16 @@
                         <x-logo class="w-auto h-7" />
                     </a>
                 </div>
-                <div class="flex items-center px-4 pt-1 pb-3">
-                    <div class="relative flex items-center w-full h-full rounded-lg">
-                        <x-phosphor-magnifying-glass class="absolute left-0 w-5 h-5 ml-2 text-gray-400 -translate-y-px" />
-                        <input type="text" class="w-full py-2 pl-8 text-sm border rounded-lg bg-zinc-200/70 focus:bg-white duration-50 dark:bg-zinc-950 ease border-zinc-200 dark:border-zinc-700/70 dark:ring-zinc-700/70 focus:ring dark:text-zinc-200 dark:focus:ring-zinc-700/70 dark:focus:border-zinc-700 focus:ring-zinc-200 focus:border-zinc-300 dark:placeholder-zinc-400" placeholder="Search">
-                    </div>
-                </div>
 
                 <div class="flex flex-col justify-start items-center px-4 space-y-1.5 w-full h-full text-slate-600 dark:text-zinc-400">
-                    <x-app.sidebar-link href="{{route('dashboard')}}" icon="phosphor-house" :active="Request::is('dashboard')">Dashboard</x-app.sidebar-link>
-                    <x-app.sidebar-link href="{{route('dashboard.designs')}}" icon="phosphor-pencil-line" active="false">Designs</x-app.sidebar-link>
-                    <x-app.sidebar-link href="{{route('dashboard.drivers')}}" icon="phosphor-pencil-line" active="false">Drivers</x-app.sidebar-link>
+                    <x-app.sidebar-link href="{{route('dashboard')}}" icon="phosphor-house" active="Request::is('dashboard')">Dashboard</x-app.sidebar-link>
+                    <x-app.sidebar-link href="{{route('dashboard.designs')}}" icon="phosphor-pencil-line" active="Request::is('dashboard.designs')">Designs</x-app.sidebar-link>
+                    <x-app.sidebar-link href="{{route('dashboard.drivers')}}" icon="phosphor-pencil-line" active="Request::is('dashboard.drivers')">Drivers</x-app.sidebar-link>
+                    <x-app.sidebar-link href="{{route('dashboard.files')}}" icon="phosphor-folder" active="Request::is('dashboard.files')">Files</x-app.sidebar-link>
                 </div>
             </div>
 
             <div class="relative px-2.5 space-y-1.5 text-zinc-700 dark:text-zinc-400">
-
-                <x-app.sidebar-link href="https://devdojo.com/wave/docs" target="_blank" icon="phosphor-book-bookmark-duotone" active="false">Documentation</x-app.sidebar-link>
-                <x-app.sidebar-link href="https://devdojo.com/questions" target="_blank" icon="phosphor-chat-duotone" active="false">Questions</x-app.sidebar-link>
-                <x-app.sidebar-link :href="route('changelogs')" icon="phosphor-book-open-text-duotone" :active="Request::is('changelog') || Request::is('changelog/*')">Changelog</x-app.sidebar-link>
 
                 <div x-show="sidebarTip" x-data="{ sidebarTip: $persist(true) }" class="px-1 py-3" x-collapse x-cloak>
                     <div class="relative w-full px-4 py-3 space-y-1 border rounded-lg bg-zinc-50 text-zinc-700 dark:text-zinc-100 dark:bg-zinc-800 border-zinc-200/60 dark:border-zinc-700">
