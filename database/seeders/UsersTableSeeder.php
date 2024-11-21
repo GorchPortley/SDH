@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -14,12 +15,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('users')->delete();
-        
+
         \DB::table('users')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'name' => 'Wave Admin',
@@ -35,7 +36,11 @@ class UsersTableSeeder extends Seeder
                 'verified' => 1,
             ),
         ));
-        
-        
+
+        User::factory()
+            ->count(30)
+            ->create();
+
+
     }
 }

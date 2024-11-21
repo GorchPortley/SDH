@@ -39,7 +39,6 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(191),
                 Forms\Components\FileUpload::make('avatar')
-                    ->required()
                     ->image(),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')

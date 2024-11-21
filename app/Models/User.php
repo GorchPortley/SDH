@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Wave\User as WaveUser;
 use Illuminate\Notifications\Notifiable;
 use Wave\Traits\HasProfileKeyValues;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends WaveUser
 {
-    use Notifiable, HasProfileKeyValues;
+    use Notifiable, HasProfileKeyValues, HasFactory;
 
     public $guard_name = 'web';
 
@@ -43,7 +45,7 @@ class User extends WaveUser
     protected static function boot()
     {
         parent::boot();
-        
+
         // Listen for the creating event of the model
         static::creating(function ($user) {
             // Check if the username attribute is empty
@@ -67,4 +69,15 @@ class User extends WaveUser
             $user->assignRole( config('wave.default_user_role', 'registered') );
         });
     }
+
+    public function designs(): HasMany
+    {
+    return $this->hasMany(Design::class);
+    }
+
+    public function drivers(): HasMany
+    {
+        return $this->hasMany(Driver::class);
+    }
+
 }

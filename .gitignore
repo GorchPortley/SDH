@@ -1,43 +1,23 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 & Lumen specific
+public/storage
+public/hot
+
+# Laravel 5 & Lumen specific with changed public path
+public_html/storage
+public_html/hot
+
+storage/*.key
 .env
-.env.backup
-.phpunit.result.cache
-.phpunit.cache
-Homestead.json
 Homestead.yaml
-npm-debug.log
-yarn-error.log
-/.idea
-/.vscode
-
-# Wave ignores.
-/public/.well-known
-/public/demo
+Homestead.json
 /.vagrant
-/wave-pro
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-.DS_Store
-/wave/vendor/
-/public/wave/docs
-/storage/app/analytics
-/packages
-storage/app/livewire-tmp
-resources/themes/.gitignore
-/resources/plugins/*
-!/resources/plugins/installed.json
-/storage/app/public/livewire-tmp
-/storage/app/public/*
-!/storage/app/public/demo
-
-# Ignore everything inside the resources/plugins folder
-resources/plugins/*
-
-# But do not ignore the resources/plugins folder itself
-!resources/plugins/
+.phpunit.result.cache
