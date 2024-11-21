@@ -26,7 +26,8 @@
         "ralphjsmit/livewire-urls": "^1.4",
         "spatie/laravel-permission": "^6.4",
         "stripe/stripe-php": "^15.3",
-        "tymon/jwt-auth": "@dev"
+        "tymon/jwt-auth": "@dev",
+        "unisharp/laravel-filemanager": "^2.9"
     },
     "require-dev": {
         "alebatistella/duskapiconf": "^1.2",
