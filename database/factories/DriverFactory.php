@@ -18,9 +18,30 @@ class DriverFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1, 30),
-            'brand' => $this->faker->word(),
-            'model' => $this->faker->word(),
-            'tag' => $this->faker->paragraph(),
+            'brand' => $this->faker->randomElement([
+                'ScanSpeak',
+                'SEAS',
+                'Peerless',
+                'Vifa',
+                'Dayton Audio',
+                'Fountek',
+                'Tang Band',
+                'Morel',
+                'Fostex',
+                'Eminence',
+                'Audax',
+                'AuraSound',
+                'SB Acoustics',
+                'Wavecor',
+                'Tymphany',
+                'Davis Acoustics',
+                'Audio Technology',
+                'HiVi',
+                'Accuton',
+                'CSS Audio'
+            ]),
+            'model' => $this->faker->slug(2),
+            'tag' => $this->faker->sentence(4),
             'active' => $this->faker->boolean(),
             'category' => $this->faker->randomElement(
                 ['Subwoofer', 'Woofer', 'Tweeter', 'Compression Driver', 'Exciter', 'Other']),

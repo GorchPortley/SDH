@@ -19,7 +19,7 @@ class DesignFactory extends Factory
         return [
             'user_id' => $this->faker->numberBetween(1, 30),
             'name' => $this->faker->company(),
-            'tag' => $this->faker->bs,
+            'tag' => $this->faker->sentence(3),
             'active' =>$this->faker->boolean(),
             'category' => $this->faker->randomElement(
                 ['Subwoofer', 'Full-Range', 'Two-Way', 'Three-Way','Four-Way+','Portable', 'Esoteric', 'System']),

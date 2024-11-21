@@ -3,6 +3,7 @@
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -22,10 +23,12 @@ use Filament\Tables\{Columns\ToggleColumn,
     Actions\DeleteAction,
     Actions\EditAction,
     Actions\ViewAction,
-    Columns\TextColumn};
+    Columns\TextColumn
+};
 use Livewire\Volt\Component;
 use function Laravel\Folio\{middleware, name};
 use App\Models\Design;
+use App\Models\Driver;
 
 middleware('auth');
 name('dashboard.designs');
@@ -34,6 +37,8 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
     use InteractsWithForms, InteractsWithTable;
 
     public ?array $data = [];
+
+    public Driver $driver;
 
     public function table(Table $table): Table
     {
@@ -73,7 +78,55 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->columns(2),
                         RichEditor::make('description')
                             ->columns(2),
-                        KeyValue::make('bill_of_materials')])])
+                        KeyValue::make('bill_of_materials'),
+                        Repeater::make('components')
+                            ->collapsible()
+                            ->relationship()
+                            ->itemLabel(fn (array $state): ?string => $state['position'] ?? null)
+                            ->schema([
+                                Select::make('driver_id')
+                                    ->searchable(['brand','model'])
+                                    ->searchPrompt('Search by Brand or Model')
+                                    ->options(Driver::where('active', 1)->select('id', 'brand', 'model', 'size', 'category')->get()->mapWithKeys(function ($driver) {
+                                            return [$driver->id => $driver->brand . ' ' . $driver->model . ': ' . $driver->size . ' inch ' . $driver->category];
+                                        }))
+                                    ->preload()
+                                    ->native(false)
+                                    ->label('Driver'),
+                                Select::make('position')
+                                    ->options(['LF'=>'LF','LMF'=>'LMF','MF'=>'MF','HMF'=>'HMF','HF'=>'HF','Other'=>'Other']),
+                                TextInput::make('quantity')
+                                    ->numeric(),
+                                TextInput::make('low_frequency')
+                                    ->numeric(),
+                                TextInput::make('high_frequency')
+                                    ->numeric(),
+                                TextInput::make('air_volume')
+                                    ->numeric(),
+                                MarkdownEditor::make('description'),
+                                KeyValue::make('specifications')
+                                    ->default([
+                                        'fs' => '',
+                                        'qts' => '',
+                                        'vas' => '',
+                                        'xmax' => '',
+                                        'le' => '',
+                                        're' => '',
+                                        'bl' => '',
+                                        'sd' => '',
+                                        'mms' => '',
+                                        'cms' => '',
+                                    ])
+                                    ->addable(false)
+                                    ->deletable(false)
+                                    ->reorderable(false)
+                                    ->editableKeys(false)
+                                    ->keyLabel('Parameter')
+                                    ->valueLabel('Value')
+                            ])
+                    ])
+
+            ])
             ->columns([
                 ToggleColumn::make('active')
                     ->onColor('success'),
@@ -103,8 +156,10 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->options(['Subwoofer' => 'Subwoofer', 'Full-Range' => 'Full-Range', 'Two-Way' => 'Two-Way'
                                 , 'Three-Way' => 'Three-Way', 'Four-Way+', 'Four-Way+', 'Portable' => 'Portable', 'Esoteric' => 'Esoteric']),
                         TextInput::make('price')
+                            ->inputMode('decimal')
                             ->numeric(),
                         TextInput::make('build_cost')
+                            ->inputMode('decimal')
                             ->numeric(),
                         TextInput::make('impedance')
                             ->numeric(),
@@ -114,10 +169,57 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->columns(2),
                         RichEditor::make('description')
                             ->columns(2),
-                        KeyValue::make('bill_of_materials')]),
+                        KeyValue::make('bill_of_materials'),
+                        Repeater::make('components')
+                            ->collapsible()
+                            ->relationship()
+                            ->itemLabel(fn (array $state): ?string => $state['position'] ?? null)
+                            ->schema([
+                                Select::make('driver_id')
+                                    ->searchable(['brand','model'])
+                                    ->searchPrompt('Search by Brand or Model')
+                                    ->options(Driver::where('active', 1)->select('id', 'brand', 'model', 'size', 'category')->get()->mapWithKeys(function ($driver) {
+                                        return [$driver->id => $driver->brand . ' ' . $driver->model . ': ' . $driver->size . ' inch ' . $driver->category];
+                                    }))
+                                    ->preload()
+                                    ->native(false)
+                                    ->label('Driver'),
+                                Select::make('position')
+                                    ->options(['LF'=>'LF','LMF'=>'LMF','MF'=>'MF','HMF'=>'HMF','HF'=>'HF','Other'=>'Other']),
+                                TextInput::make('quantity')
+                                    ->numeric(),
+                                TextInput::make('low_frequency')
+                                    ->numeric(),
+                                TextInput::make('high_frequency')
+                                    ->numeric(),
+                                TextInput::make('air_volume')
+                                    ->numeric(),
+                                MarkdownEditor::make('description'),
+                                KeyValue::make('specifications')
+                                    ->default([
+                                        'fs' => '',
+                                        'qts' => '',
+                                        'vas' => '',
+                                        'xmax' => '',
+                                        'le' => '',
+                                        're' => '',
+                                        'bl' => '',
+                                        'sd' => '',
+                                        'mms' => '',
+                                        'cms' => '',
+                                    ])
+                                    ->addable(false)
+                                    ->deletable(false)
+                                    ->reorderable(false)
+                                    ->editableKeys(false)
+                                    ->keyLabel('Parameter')
+                                    ->valueLabel('Value')
+                            ])
+                    ]),
                 EditAction::make()
-                    ->form([Toggle::make('active')
-                        ->onColor('success'),
+                    ->form([
+                        Toggle::make('active')
+                            ->onColor('success'),
                         TextInput::make('name')
                             ->required()
                             ->maxLength(255),
@@ -127,8 +229,10 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->options(['Subwoofer' => 'Subwoofer', 'Full-Range' => 'Full-Range', 'Two-Way' => 'Two-Way'
                                 , 'Three-Way' => 'Three-Way', 'Four-Way+', 'Four-Way+', 'Portable' => 'Portable', 'Esoteric' => 'Esoteric']),
                         TextInput::make('price')
+                            ->inputMode('decimal')
                             ->numeric(),
                         TextInput::make('build_cost')
+                            ->inputMode('decimal')
                             ->numeric(),
                         TextInput::make('impedance')
                             ->numeric(),
@@ -138,7 +242,53 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->columns(2),
                         RichEditor::make('description')
                             ->columns(2),
-                        KeyValue::make('bill_of_materials')]),
+                        KeyValue::make('bill_of_materials'),
+                        Repeater::make('components')
+                            ->collapsible()
+                            ->relationship()
+                            ->itemLabel(fn (array $state): ?string => $state['position'] ?? null)
+                            ->schema([
+                                Select::make('driver_id')
+                                    ->searchable(['brand','model'])
+                                    ->searchPrompt('Search by Brand or Model')
+                                    ->options(Driver::where('active', 1)->select('id', 'brand', 'model', 'size', 'category')->get()->mapWithKeys(function ($driver) {
+                                        return [$driver->id => $driver->brand . ' ' . $driver->model . ': ' . $driver->size . ' inch ' . $driver->category];
+                                    }))
+                                    ->preload()
+                                    ->native(false)
+                                    ->label('Driver'),
+                                Select::make('position')
+                                    ->options(['LF'=>'LF','LMF'=>'LMF','MF'=>'MF','HMF'=>'HMF','HF'=>'HF','Other'=>'Other']),
+                                TextInput::make('quantity')
+                                    ->numeric(),
+                                TextInput::make('low_frequency')
+                                    ->numeric(),
+                                TextInput::make('high_frequency')
+                                    ->numeric(),
+                                TextInput::make('air_volume')
+                                    ->numeric(),
+                                MarkdownEditor::make('description'),
+                                KeyValue::make('specifications')
+                                    ->default([
+                                        'fs' => '',
+                                        'qts' => '',
+                                        'vas' => '',
+                                        'xmax' => '',
+                                        'le' => '',
+                                        're' => '',
+                                        'bl' => '',
+                                        'sd' => '',
+                                        'mms' => '',
+                                        'cms' => '',
+                                    ])
+                                    ->addable(false)
+                                    ->deletable(false)
+                                    ->reorderable(false)
+                                    ->editableKeys(false)
+                                    ->keyLabel('Parameter')
+                                    ->valueLabel('Value')
+                            ])
+                    ]),
                 DeleteAction::make()
                     ->after(function () {
                         Notification::make()
@@ -202,7 +352,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
 
 <x-layouts.app>
     @volt('designs')
-        {{ $this->table }}
+    {{ $this->table }}
     @endvolt
 </x-layouts.app>
 
