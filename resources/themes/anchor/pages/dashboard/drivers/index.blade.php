@@ -100,24 +100,64 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
             ])
             ->columns([
                 ToggleColumn::make('active')
-                    ->onColor('success'),
+                    ->onColor('success')
+                    ->sortable(),
                 TextColumn::make('brand')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('model')
-                    ->limit(50)
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
+                    ->searchable()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->description(fn (Driver $record): string => $record->tag),
+                TextColumn::make('category')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('size')
+                    ->label('Size in inches')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('impedance')
+                    ->label('Impedance')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('created_at')
+                    ->label('Created On')
+                    ->date()
+                    ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->actions([
-                ViewAction::make()
-                    ->form([]),
                 EditAction::make()
-                    ->form([]),
+                    ->form([
+                        Toggle::make('active')
+                            ->onColor('success'),
+                        TextInput::make('brand')
+                            ->datalist(DB::table('drivers')->distinct()->orderBy('brand', 'asc')->pluck('brand')),
+                        TextInput::make('model'),
+                        TextInput::make('tag'),
+                        Select::make('category')
+                            ->options(
+                                ['Subwoofer'=>'Subwoofer','Woofer'=>'Woofer','Tweeter'=>'Tweeter','Compression Driver'=>'Compression Driver','Exciter'=>'Exciter','Other'=>'Other']),
+                        TextInput::make('size')
+                            ->numeric(),
+                        TextInput::make('impedance')
+                            ->numeric(),
+                        TextInput::make('power')
+                            ->numeric(),
+                        TextInput::make('price')
+                            ->numeric(),
+                        TextInput::make('link')
+                            ->url(),
+                        TextInput::make('summary'),
+                        MarkdownEditor::make('description'),
+                        KeyValue::make('factory_specs')
+                            ->addable(false)
+                            ->deletable(false)
+                            ->reorderable(false)
+                            ->editableKeys(false)
+                            ->keyLabel('Parameter')
+                            ->valueLabel('Value'),
+                    ]),
                 DeleteAction::make()
                     ->after(function () {
                         Notification::make()
