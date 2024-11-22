@@ -16,6 +16,7 @@ class Design extends Model
         'user_id',
         'name',
         'tag',
+        'card_image',
         'active',
         'category',
         'price',

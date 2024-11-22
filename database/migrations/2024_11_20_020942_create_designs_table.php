@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('name')->nullable();
             $table->string('tag')->nullable();
+            $table->string('card_image')->default('https://via.placeholder.com/150');
             $table->boolean('active')->default(false);
             $table->enum('category',
                 ['Subwoofer', 'Full-Range', 'Two-Way', 'Three-Way','Four-Way+','Portable', 'Esoteric', 'System']);

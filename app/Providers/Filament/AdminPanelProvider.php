@@ -53,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->colors([
-                'primary' => Color::Blue,
+                'primary' => Color::Purple,
             ])
             ->sidebarCollapsibleOnDesktop()
             ->viteTheme('resources/css/filament/admin/theme.css')
@@ -101,7 +101,7 @@ class AdminPanelProvider extends PanelProvider
             ->darkModeBrandLogo(fn () => view('wave::admin.logo-dark'));
     }
 
-    // This function will render if user has account crenditals file 
+    // This function will render if user has account crenditals file
     // located at storage/app/analytics/service-account-credentials.json
     // Find More details here: https://github.com/spatie/laravel-analytics
     private function renderAnalyticsIfCredentialsExist(){
