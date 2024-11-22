@@ -26,11 +26,11 @@ use Filament\Tables\{Columns\ToggleColumn,
 };
 use Illuminate\Support\Facades\DB;
 use Livewire\Volt\Component;
-use function Laravel\Folio\{middleware, name};
 use App\Models\Driver;
-
+use function Laravel\Folio\{middleware, name};
 middleware('auth');
 name('dashboard.drivers');
+
 
 new class extends Component implements HasForms, Tables\Contracts\HasTable {
     use InteractsWithForms, InteractsWithTable;

@@ -7,7 +7,7 @@
 
     <x-marketing.elements.header />
 
-    <main class="flex-grow overflow-x-hidden">
+    <main class="flex-grow">
         {{ $slot }}
     </main>
 

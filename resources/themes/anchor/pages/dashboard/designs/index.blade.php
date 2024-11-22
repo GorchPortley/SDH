@@ -2,6 +2,7 @@
 
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -59,6 +60,10 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                         TextInput::make('name')
                             ->required()
                             ->maxLength(255),
+                        FileUpload::make('card_image')
+                            ->disk('public')
+                            ->directory('designthumbs')
+                            ->visibility('public'),
                         TextInput::make('tag')
                             ->maxLength(255),
                         Select::make('category')
@@ -225,6 +230,10 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->maxLength(255),
                         TextInput::make('tag')
                             ->maxLength(255),
+                        FileUpload::make('card_image')
+                            ->disk('public')
+                            ->directory('designthumbs')
+                            ->visibility('private'),
                         Select::make('category')
                             ->options(['Subwoofer' => 'Subwoofer', 'Full-Range' => 'Full-Range', 'Two-Way' => 'Two-Way'
                                 , 'Three-Way' => 'Three-Way', 'Four-Way+', 'Four-Way+', 'Portable' => 'Portable', 'Esoteric' => 'Esoteric']),
@@ -351,8 +360,10 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
 
 
 <x-layouts.app>
-    @volt('designs')
+    @volt('dashboard.designs')
+    <div>
     {{ $this->table }}
+    </div>
     @endvolt
 </x-layouts.app>
 
