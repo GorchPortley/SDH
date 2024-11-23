@@ -7,10 +7,10 @@
     'price'=>'',
     'build_cost'=>'',
     'impedance'=>'',
-    'power'=>''
+    'power'=>'',
 ])
 
-<div class=" flex border-2">
+<div class="flex border-2">
     <div class="">
         <div id="" class="">
             <div class="">
@@ -32,7 +32,7 @@
 
         <!-- Footer with Add to Cart and Enter Room buttons -->
         <div class="">
-            <x-button> Add To Cart</x-button>
+            <livewire:add-to-cart-button :designId="$id"></livewire:add-to-cart-button>
             <x-button href="designs/design/{{$id}}" tag="a">Enter Room</x-button>
         </div>
 
