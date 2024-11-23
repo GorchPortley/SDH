@@ -22,11 +22,14 @@ new class extends Component {
 <x-layouts.marketing>
     @volt('designs')
     <div>
-        <div class="border-2 hidden md:block h-60 mb-2">BANNER</div>
+    <div class="hidden md:block h-300px mb-2">
+        <x-app.design-browser-banner></x-app.design-browser-banner>
+    </div>
     <div class="md:block lg:flex">
-
-        <div class="sticky top-12 block lg:w-1/4 bg-white mr-2"><x-app.design-browser-filters></x-app.design-browser-filters></div>
-    <div class="border-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+        <div class="sticky top-12  z-10 block lg:w-1/4 mx-2">
+            <x-app.design-browser-filters></x-app.design-browser-filters>
+            </div>
+        <div class="border-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 p-4">
     @foreach($designs as $design)
        <x-app.design-card
            id="{{$design->id}}"

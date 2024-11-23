@@ -81,7 +81,9 @@
                     <x-button href="{{ route('register') }}" tag="a" class="text-sm">Sign Up</x-button>
                 </div>
             @else
-                <x-button href="{{ route('login') }}" tag="a" class="text-sm" class="relative z-20 flex-shrink-0 hidden ml-2 md:block">View Dashboard</x-button>
+                <div>
+            <x-app.user-menu position="top"></x-app.user-menu>
+                </div>
             @endguest
 
         </div>

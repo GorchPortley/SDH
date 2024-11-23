@@ -21,6 +21,7 @@ class DesignFactory extends Factory
             'name' => $this->faker->company(),
             'tag' => $this->faker->sentence(3),
             'active' =>$this->faker->boolean(),
+            'card_image'=> 'demo/800x800.png',
             'category' => $this->faker->randomElement(
                 ['Subwoofer', 'Full-Range', 'Two-Way', 'Three-Way','Four-Way+','Portable', 'Esoteric', 'System']),
             'price' => $this->faker->randomFloat(2, 0.01, 1000),

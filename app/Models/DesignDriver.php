@@ -25,11 +25,11 @@ class DesignDriver extends Pivot
 
     public function design(): BelongsTo
     {
-        return $this->belongsTo(Design::class, 'id');
+        return $this->belongsTo(Design::class);
     }
 
     public function driver(): BelongsTo
     {
-        return $this->belongsTo(Driver::class, 'id');
+        return $this->belongsTo(Driver::class);
     }
 }
