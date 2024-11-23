@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 use Wave\User as WaveUser;
 use Illuminate\Notifications\Notifiable;
@@ -78,6 +80,17 @@ class User extends WaveUser
     public function drivers(): HasMany
     {
         return $this->hasMany(Driver::class);
+    }
+
+    public function designPurchases(): HasMany
+    {
+        return $this->hasMany(DesignPurchase::class);
+    }
+
+    public function cart(): HasOne
+    {
+        return $this->hasOne(Cart::class)
+            ->with('items');
     }
 
 }

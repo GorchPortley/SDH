@@ -15,6 +15,5 @@
     @include('theme::partials.footer')
     @include('theme::partials.footer-scripts')
     {{ $javascript ?? '' }}
-
 </body>
 </html>
