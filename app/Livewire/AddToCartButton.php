@@ -22,6 +22,17 @@ class AddToCartButton extends Component
     public function addToCart()
     {
         if ($this->design->price <= 0) {
+            // Check for existing free design
+            $existingPurchase = DesignPurchase::where([
+                'user_id' => auth()->id(),
+                'design_id' => $this->design->id
+            ])->exists();
+
+            if ($existingPurchase) {
+                session()->flash('message', 'You already own this design!');
+                return;
+            }
+
             DesignPurchase::create([
                 'user_id' => auth()->id(),
                 'design_id' => $this->design->id,
@@ -31,21 +42,28 @@ class AddToCartButton extends Component
             ]);
 
             session()->flash('message', 'Free design added to your library!');
-            return;  // Add return to prevent adding free items to cart
+            return;
         }
 
-        $cart = auth()->user()->cart ?? Cart::create([
-            'user_id' => auth()->id()
-        ]);
+        // For paid designs, check cart for duplicates
+        $cart = Cart::firstOrCreate(['user_id' => auth()->id()]);
+
+        // Check if design already in cart
+        $existingCartItem = $cart->items()->where('design_id', $this->design->id)->exists();
+
+        if ($existingCartItem) {
+            session()->flash('message', 'This design is already in your cart!');
+            return;
+        }
 
         $cart->items()->create([
             'design_id' => $this->design->id,
             'price' => $this->design->price
         ]);
 
+        session()->flash('message', 'Design added to cart!');
         $this->dispatch('cart-updated');
     }
-
     public function render()  // Add render method
     {
         return view('livewire.add-to-cart-button');
