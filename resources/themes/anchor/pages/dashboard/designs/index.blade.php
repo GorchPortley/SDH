@@ -79,9 +79,11 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->numeric(),
                         TextInput::make('power')
                             ->numeric(),
-                        Textarea::make('summary')
+                        RichEditor::make('summary')
+                            ->fileAttachmentsDirectory('attachments')
                             ->columns(2),
                         RichEditor::make('description')
+                            ->fileAttachmentsDirectory('attachments')
                             ->columns(2),
                         KeyValue::make('bill_of_materials'),
                         Repeater::make('components')
@@ -108,7 +110,8 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                     ->numeric(),
                                 TextInput::make('air_volume')
                                     ->numeric(),
-                                MarkdownEditor::make('description'),
+                                RichEditor::make('description')
+                                    ->fileAttachmentsDirectory('attachments'),
                                 KeyValue::make('specifications')
                                     ->default([
                                         'fs' => '',
@@ -170,9 +173,11 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->numeric(),
                         TextInput::make('power')
                             ->numeric(),
-                        Textarea::make('summary')
+                        RichEditor::make('summary')
+                            ->fileAttachmentsDirectory('attachments')
                             ->columns(2),
                         RichEditor::make('description')
+                            ->fileAttachmentsDirectory('attachments')
                             ->columns(2),
                         KeyValue::make('bill_of_materials'),
                         Repeater::make('components')
@@ -199,7 +204,8 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                     ->numeric(),
                                 TextInput::make('air_volume')
                                     ->numeric(),
-                                MarkdownEditor::make('description'),
+                                RichEditor::make('description')
+                                    ->fileAttachmentsDirectory('attachments'),
                                 KeyValue::make('specifications')
                                     ->default([
                                         'fs' => '',
@@ -247,9 +253,11 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->numeric(),
                         TextInput::make('power')
                             ->numeric(),
-                        Textarea::make('summary')
+                        RichEditor::make('summary')
+                            ->fileAttachmentsDirectory('attachments')
                             ->columns(2),
                         RichEditor::make('description')
+                            ->fileAttachmentsDirectory('attachments')
                             ->columns(2),
                         KeyValue::make('bill_of_materials'),
                         Repeater::make('components')
@@ -276,7 +284,8 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                     ->numeric(),
                                 TextInput::make('air_volume')
                                     ->numeric(),
-                                MarkdownEditor::make('description'),
+                                RichEditor::make('description')
+                                    ->fileAttachmentsDirectory('attachments'),
                                 KeyValue::make('specifications')
                                     ->default([
                                         'fs' => '',
@@ -349,7 +358,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                     ->numeric(),
                 Textarea::make('summary')
                     ->columns(2),
-                MarkdownEditor::make('description'),
+                RichEditor::make('description'),
                 KeyValue::make('bill_of_materials'),
             ])
             ->statePath('data');
