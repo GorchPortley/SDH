@@ -7,9 +7,10 @@
     'price'=>'',
     'build_cost'=>'',
     'impedance'=>'',
-    'power'=>''
+    'power'=>'',
 ])
 
+create-designs-page
 <div class="flex flex-col bg-white dark:bg-zinc-800 dark:text-white border border-gray-200 dark:border-zinc-700 rounded-lg overflow-hidden h-[600px] w-full">
     <!-- Image Section (40% of height) -->
     <div class="h-2/5 w-full">
@@ -34,6 +35,7 @@
             <p class="text-gray-600 dark:text-zinc-400">Build Cost: ${{ $build_cost }}</p>
         </div>
 
+create-designs-page
         <!-- Specs Table (45% of content height) -->
         <div class="h-[45%] flex items-center">
             <table class="w-full text-sm">
@@ -50,6 +52,11 @@
                     <td class="py-1 text-right font-medium">{{ $power }}</td>
                 </tr>
             </table>
+        <!-- Footer with Add to Cart and Enter Room buttons -->
+        <div class="">
+            <livewire:add-to-cart-button :designId="$id"></livewire:add-to-cart-button>
+            <x-button href="designs/design/{{$id}}" tag="a">Enter Room</x-button>
+Speaker-Design-Hub
         </div>
 
         <!-- Buttons (20% of content height) -->
