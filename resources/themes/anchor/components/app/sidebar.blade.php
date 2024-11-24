@@ -34,13 +34,16 @@
                                         active="Request::is('dashboard')">Dashboard
                     </x-app.sidebar-link>
                     <x-app.sidebar-link href="{{route('dashboard.designs')}}" icon="phosphor-intersect-three"
-                                        active="Request::is('dashboard.designs')">Designs
+                                        active="Request::is('dashboard.designs')">My Designs
                     </x-app.sidebar-link>
                     <x-app.sidebar-link href="{{route('dashboard.drivers')}}" icon="phosphor-circles-three"
-                                        active="Request::is('dashboard.drivers')">Drivers
+                                        active="Request::is('dashboard.drivers')">My Drivers
                     </x-app.sidebar-link>
                     <x-app.sidebar-link href="{{route('dashboard.files')}}" icon="phosphor-folder"
-                                        active="Request::is('dashboard.files')">Files
+                                        active="Request::is('dashboard.files')">My Files
+                    </x-app.sidebar-link>
+                    <x-app.sidebar-link href="{{route('dashboard.library')}}" icon="phosphor-books"
+                                        active="Request::is('dashboard.library')">My Design Library
                     </x-app.sidebar-link>
                 </div>
             </div>

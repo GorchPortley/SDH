@@ -52,7 +52,7 @@ new class extends Component
     public function with(): array
     {
         return [
-            'items' => auth()->user()->cart?->items->load('design') ?? collect(),
+            'items' => auth()->user()->cart?->items->load('design', 'design.designer') ?? collect(),
             'total' => auth()->user()->cart?->total() ?? 0
         ];
     }
@@ -70,14 +70,10 @@ new class extends Component
                     @foreach($items as $item)
                         <div class="p-6 flex items-center justify-between">
                             <div class="flex items-center">
-                                @if($item->design->card_image)
-                                    <img src="{{ $item->design->card_image }}"
-                                         class="w-16 h-16 object-cover rounded">
-                                @endif
                                 <div class="ml-4">
-                                    <h3 class="font-medium dark:text-white">{{ $item->design->name }}</h3>
+                                    <h3 class="font-medium dark:text-white">{{ $item->design->name ?? 'Unknown Design' }} </h3>
                                     <p class="text-gray-500 dark:text-zinc-400">
-                                        Designed by {{ $item->design->designer->name }}
+                                        Designed by {{ $item->design->designer->name ?? 'Unknown Designer' }}
                                     </p>
                                 </div>
                             </div>
