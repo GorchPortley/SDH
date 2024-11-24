@@ -1,3 +1,3 @@
-<section {{ $attributes->twMerge('py-5 sm:py-8 lg:py-10 mx-auto w-full max-w-4xl') }}>
+<section {{ $attributes->twMerge('py-6 sm:py-4 lg:py-2 mx-auto w-full') }}>
     {{ $slot }}
 </section>
