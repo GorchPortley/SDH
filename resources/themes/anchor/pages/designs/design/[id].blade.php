@@ -34,7 +34,7 @@ new class extends Component {
                 <!-- Image section -->
                 <div class="lg:grid lg:grid-cols-2">
                 <div class="aspect-w-16 aspect-h-9 w-full align-middle rounded-lg mb-2 lg:mb-0">
-              <!--change src to appropriate url --><img src="https://cong.test/storage/{{$design->card_image}}" alt="{{ $design->name }}" class="w-full h-auto">
+              <img src="{{$appUrl = config('app.url')}}/storage/{{ $card_image }}" alt="{{ $design->name }}" class="w-full h-auto">
                 </div>
 
                 <!-- Design info -->
@@ -122,7 +122,7 @@ new class extends Component {
                     </div>
 </div>
 
-                @if($design->price < 0.01 || $design->sales()->where('user_id', auth()->id())->exists())
+                @if($design->price < 0.01 || $design->sales()->where('user_id', auth()->id())->exists() || auth()->user()->hasRole('admin'))
                     <!-- Bill of Materials -->
                     @if($design->bill_of_materials)
                         <div class="mt-8 border-t border-gray-200 pt-8">
@@ -150,7 +150,7 @@ new class extends Component {
                         </div>
                     @endif
                 @endif
-                @if($design->sales()->where('user_id', auth()->id())->doesntExist())
+                @if($design->sales()->where('user_id', auth()->id())->doesntExist() && !auth()->user()->hasRole('admin'))
                     <div class="w-full bg-zinc-600 h-80">
                         <p class="text-white align-middle justify-center">Sorry, you need Access for this section</p>
                         <div>

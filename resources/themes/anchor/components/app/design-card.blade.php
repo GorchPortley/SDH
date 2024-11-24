@@ -9,11 +9,12 @@
     'impedance'=>'',
     'power'=>'',
 ])
+
 <div class="bg-white dark:bg-zinc-800 dark:text-white border border-gray-200 dark:border-zinc-700 rounded-lg hover:shadow-lg overflow-hidden flex flex-col">
     <!-- Image Section (Fixed 200x200) -->
     <div class="w-200px h-200px">
         <a href="designs/design/{{$id}}">
-            <!--change src to appropriate url --><img src="https://cong.test/storage/{{ $card_image }}"
+            <img src="{{$appUrl = config('app.url')}}/storage/{{ $card_image }}"
                  class="w-200px h-200px object-cover">
         </a>
     </div>
