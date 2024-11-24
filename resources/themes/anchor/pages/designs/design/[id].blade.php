@@ -11,7 +11,7 @@ new class extends Component {
 
     public function mount(string $id)
     {
-        $this->design = Design::with(['designer', 'components.driver'])->findOrFail($id);
+        $this->design = Design::with(['designer', 'components.driver', 'sales'])->findOrFail($id);
     }
 }; ?>
 
@@ -121,7 +121,8 @@ new class extends Component {
                         </div>
                     </div>
 </div>
-                @if($design->price < 0.01)
+
+                @if($design->price < 0.01 || $design->sales()->where('user_id', auth()->id())->exists())
                     <!-- Bill of Materials -->
                     @if($design->bill_of_materials)
                         <div class="mt-8 border-t border-gray-200 pt-8">
@@ -132,7 +133,7 @@ new class extends Component {
                                         <li class="py-3 flex justify-between">
                                             <span class="text-gray-900">{{ $material ?? 'Unknown Item' }}</span>
                                             <div class="flex items-center space-x-4">
-                                            <span class="text-gray-500">x{{ $quantity }}</span>
+                                                <span class="text-gray-500">x{{ $quantity }}</span>
                                             </div>
                                         </li>
                                     @endforeach
@@ -149,12 +150,11 @@ new class extends Component {
                         </div>
                     @endif
                 @endif
-                @if($design->price > 0)
+                @if($design->sales()->where('user_id', auth()->id())->doesntExist())
                     <div class="w-full bg-zinc-600 h-80">
-                    <p class="text-white align-middle justify-center">Sorry, you need Access for this section</p>
-                    <div>
-                @endif
-
+                        <p class="text-white align-middle justify-center">Sorry, you need Access for this section</p>
+                        <div>
+                            @endif
                 </div>
             </div>
         </main>
