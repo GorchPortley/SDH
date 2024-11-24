@@ -9,17 +9,17 @@
     'impedance'=>'',
     'power'=>'',
 ])
-
-<div class="bg-white dark:bg-zinc-800 dark:text-white border border-gray-200 dark:border-zinc-700 rounded-lg hover:shadow-lg overflow-hidden h-[500px] w-full">
-    <!-- Image Section (40% of height) -->
-    <div class="h-1/2 w-full">
+<div class="bg-white dark:bg-zinc-800 dark:text-white border border-gray-200 dark:border-zinc-700 rounded-lg hover:shadow-lg overflow-hidden flex flex-col">
+    <!-- Image Section (Fixed 200x200) -->
+    <div class="w-200px h-200px">
         <a href="designs/design/{{$id}}">
-            <img src="{{ $card_image }}" class="w-full h-full object-cover">
+            <!--change src to appropriate url --><img src="https://cong.test/storage/{{ $card_image }}"
+                 class="w-200px h-200px object-cover">
         </a>
     </div>
-
-    <!-- Content Section (60% of height) -->
-    <div class="h-1/2 flex flex-col p-2 space-y-4">
+    <!-- Content Section -->
+    <div class="flex flex-col p-2 space-y-4">
+        <!-- Rest of the content remains the same -->
         <!-- Title and Basic Info -->
         <div class="text-center">
             <h5 class="text-lg font-bold mb-1">
@@ -27,27 +27,24 @@
             </h5>
             <p class="text-gray-600 dark:text-zinc-400 italic text-sm">{{ $tag }}</p>
         </div>
-
         <!-- Pricing -->
         <table>
             <tbody>
-                <tr class="border-t">
-                    <th scope="row">Design Price</th>
-                    <td>${{ $price }}</td>
-                </tr>
-                <tr>
-                    <th scope="row">Build Cost</th>
-                    <td>${{ $build_cost }}</td>
-                </tr>
+            <tr class="border-t">
+                <th scope="row">Design Price</th>
+                <td>${{ $price }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Build Cost</th>
+                <td>${{ $build_cost }}</td>
+            </tr>
             </tbody>
         </table>
-
         <!-- Buttons -->
         <div class="flex justify-center space-x-4 m-2">
             <livewire:add-to-cart-button :design-id="$id" />
             <x-button href="designs/design/{{$id}}" tag="a">Enter Room</x-button>
         </div>
-
         <!-- Specs Table -->
         <div class="flex-grow">
             <table class="w-full text-sm">
@@ -65,6 +62,5 @@
                 </tr>
             </table>
         </div>
-
     </div>
 </div>

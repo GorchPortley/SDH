@@ -1,5 +1,9 @@
 <div>
 
+    @guest()
+        <x-button color="danger" tag="a" href="{{route('login')}}">Log In to Purchase</x-button>
+    @endguest
+    @auth()
     @if($design->price <= 0)
         @if(auth()->user()->designPurchases()->where('design_id', $design->id)->exists())
             <x-button
@@ -32,4 +36,6 @@
             </x-button>
         @endif
     @endif
+    @endauth
+
 </div>

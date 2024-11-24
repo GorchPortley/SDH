@@ -33,8 +33,8 @@ new class extends Component {
             <div class="">
                 <!-- Image section -->
                 <div class="lg:grid lg:grid-cols-2">
-                <div class="aspect-w-16 aspect-h-9 w-full rounded-lg mb-2 lg:mb-0">
-                        <img src="https://cong.test/{{$design->card_image}}" alt="{{ $design->name }}" class="w-full h-full object-cover">
+                <div class="aspect-w-16 aspect-h-9 w-full align-middle rounded-lg mb-2 lg:mb-0">
+              <!--change src to appropriate url --><img src="https://cong.test/storage/{{$design->card_image}}" alt="{{ $design->name }}" class="w-full h-auto">
                 </div>
 
                 <!-- Design info -->
