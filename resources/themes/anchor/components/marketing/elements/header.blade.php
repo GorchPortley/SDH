@@ -38,7 +38,7 @@
         <div class="w-screen h-full bg-black/50"></div>
     </div>
     <x-container>
-        <div class="z-30 flex items-center justify-between h-12 md:space-x-8">
+        <div class="z-30 flex items-center align-middle justify-between h-12 md:space-x-8">
             <div class="z-20 flex items-center justify-between w-full md:w-auto">
                 <div class="relative z-20 inline-flex">
                     <a href="{{ route('home') }}" class="flex items-center justify-center space-x-3 font-bold text-white">
@@ -53,8 +53,8 @@
                 </div>
             </div>
 
-            <nav :class="{ 'hidden' : !mobileMenuOpen, 'block md:relative absolute top-0 left-0 md:w-auto w-screen md:h-auto h-screen pointer-events-none md:z-10 z-10' : mobileMenuOpen }" class="h-full md:flex">
-                <ul :class="{ 'hidden md:flex' : !mobileMenuOpen, 'flex flex-col absolute md:relative md:w-auto w-screen h-full md:h-full md:overflow-auto overflow-scroll md:pt-0 mt-24 md:pb-0 pb-48 bg-white md:bg-transparent' : mobileMenuOpen }" id="menu" class="flex items-stretch justify-start flex-1 w-full h-full ml-0 border-t border-gray-100 pointer-events-auto md:items-center md:justify-center gap-x-8 md:w-auto md:border-t-0 md:flex-row">
+            <nav :class="{ 'hidden' : !mobileMenuOpen, 'block md:relative absolute top-0 left-0 md:w-auto w-screen md:h-auto h-screen pointer-events-none md:z-10 z-10' : mobileMenuOpen }" class=" md:flex">
+                <ul :class="{ 'hidden md:flex' : !mobileMenuOpen, 'flex flex-col absolute md:relative md:w-auto w-screen h-full md:h-full md:overflow-auto overflow-scroll md:pt-0 mt-12 md:pb-0 pb-48 bg-white md:bg-transparent' : mobileMenuOpen }" id="menu" class="flex items-stretch justify-start flex-1 w-full h-full ml-0 border-t border-gray-100 pointer-events-auto md:items-center md:justify-center gap-x-8 md:w-auto md:border-t-0 md:flex-row">
                     <li class="flex-shrink-0 h-16 border-b border-gray-100 md:border-b-0 md:h-full">
                         <a href="{{ route('designs') }}" class="flex items-center h-full text-sm font-semibold text-gray-400 transition duration-300 md:px-0 px-7 hover:bg-gray-100 md:hover:bg-transparent hover:text-gray-100">Designs</a>
                     </li>
@@ -67,11 +67,14 @@
                             <x-button href="{{ route('register') }}" tag="a" class="w-full text-sm">Sign Up</x-button>
                         </li>
                     @else
-                        <li class="flex items-center justify-center w-full pt-3 md:hidden px-7">
-                            <x-button href="{{ route('login') }}" tag="a" class="w-full text-sm">View Dashboard</x-button>
+                        <!-- Add this for mobile view -->
+                        <li class="h-16 border-b border-gray-100 md:hidden">
+                            <div class="flex flex-row items-center justify-center p-2 h-full">
+                                <x-app.user-menu position="top"/>
+                                <x-button href="{{ route('cart') }}" tag="a" class="m-2" icon="phosphor-shopping-cart" badge="{{auth()->user()->load('cart.items')->cart?->items->count() ?? null}}"/>
+                            </div>
                         </li>
                     @endguest
-
                 </ul>
             </nav>
 
@@ -81,11 +84,12 @@
                     <x-button href="{{ route('register') }}" tag="a" class="text-sm">Sign Up</x-button>
                 </div>
             @else
-                <div>
-            <x-app.user-menu position="top"></x-app.user-menu>
+                <!-- Only show on medium screens and up -->
+                <div class="hidden md:flex flex-row">
+                    <x-app.user-menu position="top"/>
+                    <x-button href="{{ route('cart') }}" tag="a" class="m-2" icon="phosphor-shopping-cart" badge="{{auth()->user()->load('cart.items')->cart?->items->count() ?? null}}"/>
                 </div>
             @endguest
-
         </div>
     </x-container>
 

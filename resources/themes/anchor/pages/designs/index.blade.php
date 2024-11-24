@@ -14,7 +14,9 @@ new class extends Component {
 
     public function mount()
     {
-        $this->designs = DB::table('designs')->where('active', 1)->get();
+        $this->designs = Design::query()
+            ->where('active', 1)
+            ->get();
     }
 
 } ?>
@@ -41,7 +43,7 @@ new class extends Component {
            build_cost="{{$design->build_cost}}"
            impedance="{{$design->impedance}}"
            power="{{$design->power}}"
-       ></x-app.design-card>
+       />
     @endforeach
     </div>
         </div>
