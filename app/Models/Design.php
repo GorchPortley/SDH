@@ -42,4 +42,9 @@ class Design extends Model
     {
         return $this->hasMany(DesignDriver::class);
     }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(DesignPurchase::class);
+    }
 }
