@@ -1,41 +1,35 @@
 <div>
-    @if (session()->has('message'))
-        <div class="text-sm text-green-600 mb-2">
-            {{ session('message') }}
-        </div>
-    @endif
 
     @if($design->price <= 0)
         @if(auth()->user()->designPurchases()->where('design_id', $design->id)->exists())
-            <button
-                disabled
-                class=""
+            <x-button
+                    disabled
+                color="success"
             >
                 Already Owned
-            </button>
+            </x-button>
         @else
-            <button
+            <x-button
                 wire:click="addToCart"
-                class=""
+                color="success"
             >
                 Get Free Design
-            </button>
+            </x-button>
         @endif
     @else
         @if(auth()->user()->cart?->items()->where('design_id', $design->id)->exists())
-            <button
+            <x-button
                 disabled
-                class=""
             >
-                In Cart
-            </button>
+                Design Added
+            </x-button>
         @else
-            <button
+            <x-button
                 wire:click="addToCart"
-                class=""
+                color="danger"
             >
-                Add to Cart (${{ number_format($design->price, 2) }})
-            </button>
+                Add to Cart
+            </x-button>
         @endif
     @endif
 </div>

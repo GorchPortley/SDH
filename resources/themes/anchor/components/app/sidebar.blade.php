@@ -30,13 +30,13 @@
 
                 <div
                     class="flex flex-col justify-start items-center px-4 space-y-1.5 w-full h-full text-slate-600 dark:text-zinc-400">
-                    <x-app.sidebar-link href="{{route('dashboard')}}" icon="phosphor-pencil-line"
+                    <x-app.sidebar-link href="{{route('dashboard')}}" icon="phosphor-house"
                                         active="Request::is('dashboard')">Dashboard
                     </x-app.sidebar-link>
-                    <x-app.sidebar-link href="{{route('dashboard.designs')}}" icon="phosphor-pencil-line"
+                    <x-app.sidebar-link href="{{route('dashboard.designs')}}" icon="phosphor-intersect-three"
                                         active="Request::is('dashboard.designs')">Designs
                     </x-app.sidebar-link>
-                    <x-app.sidebar-link href="{{route('dashboard.drivers')}}" icon="phosphor-pencil-line"
+                    <x-app.sidebar-link href="{{route('dashboard.drivers')}}" icon="phosphor-circles-three"
                                         active="Request::is('dashboard.drivers')">Drivers
                     </x-app.sidebar-link>
                     <x-app.sidebar-link href="{{route('dashboard.files')}}" icon="phosphor-folder"
