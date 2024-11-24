@@ -122,7 +122,7 @@ new class extends Component {
                     </div>
 </div>
 
-                @if($design->price < 0.01 || $design->sales()->where('user_id', auth()->id())->exists())
+                @if($design->price < 0.01 || $design->sales()->where('user_id', auth()->id())->exists() || auth()->user()->hasRole('admin'))
                     <!-- Bill of Materials -->
                     @if($design->bill_of_materials)
                         <div class="mt-8 border-t border-gray-200 pt-8">
@@ -150,7 +150,7 @@ new class extends Component {
                         </div>
                     @endif
                 @endif
-                @if($design->sales()->where('user_id', auth()->id())->doesntExist())
+                @if($design->sales()->where('user_id', auth()->id())->doesntExist() && !auth()->user()->hasRole('admin'))
                     <div class="w-full bg-zinc-600 h-80">
                         <p class="text-white align-middle justify-center">Sorry, you need Access for this section</p>
                         <div>
