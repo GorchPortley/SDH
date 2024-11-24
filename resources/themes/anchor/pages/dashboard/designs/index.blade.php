@@ -1,11 +1,11 @@
 <?php
 
-use App\Forms\Components\FRQFileUpload;
+
+use App\Models\Design;
+use App\Models\Driver;
 use App\Models\DesignDriver;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -13,19 +13,15 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\ViewField;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Notifications\Notification;
-use Filament\Support\Assets\Js;
-use Filament\Support\Facades\FilamentAsset;
 use Filament\Tables;
 use Filament\Tables\{Columns\ToggleColumn,
     Table,
     Concerns\InteractsWithTable,
-    Contracts\HasTable,
-    Actions\Action,
     Actions\CreateAction,
     Actions\DeleteAction,
     Actions\EditAction,
@@ -34,13 +30,12 @@ use Filament\Tables\{Columns\ToggleColumn,
 };
 use Livewire\Volt\Component;
 use function Laravel\Folio\{middleware, name};
-use App\Models\Design;
-use App\Models\Driver;
 
 middleware('auth');
 name('dashboard.designs');
 
 new class extends Component implements HasForms, Tables\Contracts\HasTable {
+
     use InteractsWithForms, InteractsWithTable;
 
     public ?array $data = [];
@@ -50,16 +45,82 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
     function getfrqpath($record)
     {
         if (!$record || !$record->design || !$record->driver) {
-            return 'frequency_responses/default';
+            return 'frequency_responses/default'; // fallback path
         }
 
         $userId = auth()->id();
         $designName = str($record->design->name);
-        $position = str($record->position)
-            ->upper();
-        $driverModel = str($record->driver->model);
+        $position = str($record->position)  // Changed from driver->position to just position
+            ->slug()
+            ->toString();
 
-        return "files/{$userId}/{$designName}/{$position}-{$driverModel}/Frequency";
+        return "files/{$userId}/{$designName}/{$position}/Frequency";
+    }
+
+    function getzpath($record)
+    {
+        if (!$record || !$record->design || !$record->driver) {
+            return 'frequency_responses/default'; // fallback path
+        }
+
+        $userId = auth()->id();
+        $designName = str($record->design->name);
+        $position = str($record->position)  // Changed from driver->position to just position
+        ->slug()
+            ->toString();
+
+        return "files/{$userId}/{$designName}/{$position}/Impedance";
+    }
+
+    function getotherpath($record)
+    {
+        if (!$record || !$record->design || !$record->driver) {
+            return 'frequency_responses/default'; // fallback path
+        }
+
+        $userId = auth()->id();
+        $designName = str($record->design->name);
+        $position = str($record->position)  // Changed from driver->position to just position
+        ->slug()
+            ->toString();
+
+        return "files/{$userId}/{$designName}/{$position}/Other";
+    }
+
+    function getenclosurepath($name)
+    {
+        if (!$name) {
+            return 'files/lost enclosure files';
+        }
+
+        $userId = auth()->id();
+        $designName = str($name);
+
+        return "files/{$userId}/{$designName}/Enclosure";
+    }
+
+    function getelectronicspath($name)
+    {
+        if (!$name) {
+            return 'files/lost enclosure files';
+        }
+
+        $userId = auth()->id();
+        $designName = str($name);
+
+        return "files/{$userId}/{$designName}/Electronics";
+    }
+
+    function getdesignotherpath($name)
+    {
+        if (!$name) {
+            return 'files/lost enclosure files';
+        }
+
+        $userId = auth()->id();
+        $designName = str($name);
+
+        return "files/{$userId}/{$designName}/Other Files";
     }
 
     public function table(Table $table): Table
@@ -101,6 +162,8 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->numeric(),
                         TextInput::make('power')
                             ->numeric(),
+                        Placeholder::make('File Uploads')
+                            ->content('You can upload files after creating and saving your design. Go to My Designs and edit to add files.'),
                         RichEditor::make('summary')
                             ->fileAttachmentsDirectory('attachments')
                             ->columns(2),
@@ -132,7 +195,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                     ->numeric(),
                                 TextInput::make('air_volume')
                                     ->numeric(),
-                                Placeholder::make('Frequency Uploads')
+                                Placeholder::make('File Uploads')
                                     ->content('You can upload files after creating and saving your design. Go to My Designs and edit to add files.'),
                                 RichEditor::make('description')
                                     ->fileAttachmentsDirectory('attachments'),
@@ -168,6 +231,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
         TextColumn::make('tag')
             ->limit(50)
             ->searchable(),
+        TextColumn::make('sales_count')->counts('sales'),
         TextColumn::make('created_at')
             ->dateTime()
             ->sortable()
@@ -257,6 +321,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                         ->onColor('success'),
                     TextInput::make('name')
                         ->required()
+                        ->live()
                         ->maxLength(255),
                     TextInput::make('tag')
                         ->maxLength(255),
@@ -277,6 +342,30 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                         ->numeric(),
                     TextInput::make('power')
                         ->numeric(),
+                    FileUpload::make('Enclosure_Files')
+                        ->label('Enclosure Files')
+                        ->multiple()
+                        ->preserveFilenames()
+                        ->directory(function ($get) {
+                            $name = $get('name');
+                            return $this->getenclosurepath($name);
+                        }),
+                    FileUpload::make('Electronic_Files')
+                        ->label('Electronics Files')
+                        ->multiple()
+                        ->preserveFilenames()
+                        ->directory(function ($get) {
+                            $name = $get('name');
+                            return $this->getelectronicspath($name);
+                        }),
+                    FileUpload::make('Design_Other_Files')
+                        ->label('Other Design Files')
+                        ->multiple()
+                        ->preserveFilenames()
+                        ->directory(function ($get) {
+                            $name = $get('name');
+                            return $this->getdesignotherpath($name);
+                        }),
                     RichEditor::make('summary')
                         ->fileAttachmentsDirectory('attachments')
                         ->columns(2),
@@ -313,6 +402,16 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                 ->multiple()
                                 ->preserveFilenames()
                                 ->directory(fn(?DesignDriver $record): string => $this->getfrqpath($record)),
+                            FileUpload::make('Impedance_Files')
+                                ->label('Impedance Measurements')
+                                ->multiple()
+                                ->preserveFilenames()
+                                ->directory(fn(?DesignDriver $record): string => $this->getzpath($record)),
+                            FileUpload::make('Other_Files')
+                                ->label('Other Files')
+                                ->multiple()
+                                ->preserveFilenames()
+                                ->directory(fn(?DesignDriver $record): string => $this->getotherpath($record)),
                             RichEditor::make('description')
                                 ->fileAttachmentsDirectory('attachments'),
                             KeyValue::make('specifications')
