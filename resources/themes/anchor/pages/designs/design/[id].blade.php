@@ -16,7 +16,7 @@ new class extends Component {
 }; ?>
 
 <x-layouts.marketing>
-
+    <x-app.container>
     @volt('design')
     <div class="bg-white dark:bg-zinc-900 dark:text-white">
         <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -184,4 +184,5 @@ new class extends Component {
         </main>
     </div>
     @endvolt
+    </x-app.container>
 </x-layouts.marketing>
