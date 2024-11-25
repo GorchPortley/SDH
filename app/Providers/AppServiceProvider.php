@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::component('safe-html-renderer', \App\View\Components\SafeHtmlRenderer::class);
         if ($this->app->environment() == 'production') {
             $this->app['request']->server->set('HTTPS', true);
         }

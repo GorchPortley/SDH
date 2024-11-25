@@ -126,7 +126,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
         $userId = auth()->id();
         $designName = str($name);
 
-        return "files/{$userId}/{$designName}/Display Responses";
+        return "files/{$userId}/{$designName}/Attachments/Display Responses";
     }
 
     function getphotospath($name)
@@ -138,7 +138,31 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
         $userId = auth()->id();
         $designName = str($name);
 
-        return "files/{$userId}/{$designName}/Display Images";
+        return "files/{$userId}/{$designName}/Attachments/Display Images";
+    }
+
+    function getsummaryattachmentspath($name)
+    {
+        if (!$name) {
+            return 'files/lost files/lost design photo files';
+        }
+
+        $userId = auth()->id();
+        $designName = str($name);
+
+        return "files/{$userId}/{$designName}/Attachments/Summary Images";
+    }
+
+    function getdescriptionattachmentspath($name)
+    {
+        if (!$name) {
+            return 'files/lost files/lost design photo files';
+        }
+
+        $userId = auth()->id();
+        $designName = str($name);
+
+        return "files/{$userId}/{$designName}/Attachments/Description Images";
     }
 
     public function table(Table $table): Table
@@ -280,10 +304,16 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                         TextInput::make('power')
                             ->numeric(),
                         RichEditor::make('summary')
-                            ->fileAttachmentsDirectory('attachments')
+                            ->fileAttachmentsDirectory(function ($get) {
+                                $name = $get('name');
+                                return $this->getsummaryattachmentspath($name);
+                            })
                             ->columns(2),
                         RichEditor::make('description')
-                            ->fileAttachmentsDirectory('attachments')
+                            ->fileAttachmentsDirectory(function ($get) {
+                                $name = $get('name');
+                                return $this->getdescriptionattachmentspath($name);
+                            })
                             ->columns(2),
                         KeyValue::make('bill_of_materials'),
                         Repeater::make('components')
