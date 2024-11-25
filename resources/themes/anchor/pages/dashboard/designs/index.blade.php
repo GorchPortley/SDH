@@ -225,6 +225,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                         return [$driver->id => $driver->brand . ' ' . $driver->model . ': ' . $driver->size . ' inch ' . $driver->category];
                                     }))
                                     ->preload()
+                                    ->nullable(false)
                                     ->native(false)
                                     ->label('Driver'),
                                 Select::make('position')
