@@ -38,8 +38,8 @@
                             type: 'line',
                             data: { datasets: datasetsAmplitude },
                             options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
+                                responsive: false,
+                                maintainAspectRatio: true,
                                 scales: {
                                     x: {
                                         type: 'logarithmic',
@@ -91,8 +91,8 @@
                             type: 'line',
                             data: { datasets: this.phaseData },
                             options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
+                                responsive: false,
+                                maintainAspectRatio: true,
                                 scales: {
                                     x: {
                                         type: 'logarithmic',
