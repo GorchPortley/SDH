@@ -344,13 +344,10 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                         TextInput::make('tag')
                             ->maxLength(255),
                         FileUpload::make('card_image')
-                            ->multiple()
-                            ->disk('public')
                             ->directory(function ($get) {
                                 $name = $get('name');
                                 return $this->getphotospath($name);
-                            })
-                            ->visibility('private'),
+                            }),
                         Select::make('category')
                             ->options(['Subwoofer' => 'Subwoofer', 'Full-Range' => 'Full-Range', 'Two-Way' => 'Two-Way'
                                 , 'Three-Way' => 'Three-Way', 'Four-Way+' => 'Four-Way+', 'Portable' => 'Portable', 'Esoteric' => 'Esoteric']),
