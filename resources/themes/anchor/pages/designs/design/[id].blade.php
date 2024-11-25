@@ -111,17 +111,20 @@ new class extends Component {
                             </table>
                         </div>
                     @endif
+
                 </div>
+                   <div class="w-auto col-span-2"> <livewire:frequency-response-viewer :design="$design" /> </div>
             </div>
 <div>
+
+
                     <!-- Description -->
                     <div class="border-gray-200 pt-8">
                         <h2 class="text-xl font-semibold text-gray-900">About this Design</h2>
                         <div class="mt-4">
-                            {!! str($design->summary)->sanitizeHtml() !!}
+                            <x-safe-html-renderer :content="$design->summary" />
                         </div>
                     </div>
-        <livewire:frequency-response-viewer :design="$design" />
 </div>
                 @if(auth()->check())
                     {{-- User is logged in --}}
@@ -149,7 +152,7 @@ new class extends Component {
                         @if($design->description)
                             <div class="mt-8 border-t border-gray-200 pt-8">
                                 <h2 class="text-xl font-semibold text-gray-900">Full Description</h2>
-                                {!! str($design->description)->sanitizeHtml() !!}
+                                <x-safe-html-renderer :content="$design->description" />
                             </div>
                         @endif
                     @else
