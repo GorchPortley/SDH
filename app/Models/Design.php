@@ -26,13 +26,19 @@ class Design extends Model
         'summary',
         'description',
         'bill_of_materials',
-        'frd_files'
+        'frd_files',
+        'enclosure_files',
+        'electronic_files',
+        'design_other_files',
     ];
 
     protected $casts = [
         'active' => 'boolean',
         'bill_of_materials' => 'array',
         'frd_files' => 'array',
+        'enclosure_files' => 'array',
+        'electronic_files' => 'array',
+        'design_other_files' => 'array'
     ];
 
     public function designer(): BelongsTo
