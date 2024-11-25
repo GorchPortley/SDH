@@ -120,13 +120,25 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
     function getwidgetresponsepath($name)
     {
         if (!$name) {
-            return 'files/lost files/lost widget response files';
+            return 'files/lost files/lost display response files';
         }
 
         $userId = auth()->id();
         $designName = str($name);
 
-        return "files/{$userId}/{$designName}/widget_responses";
+        return "files/{$userId}/{$designName}/Display Responses";
+    }
+
+    function getphotospath($name)
+    {
+        if (!$name) {
+            return 'files/lost files/lost design photo files';
+        }
+
+        $userId = auth()->id();
+        $designName = str($name);
+
+        return "files/{$userId}/{$designName}/Display Images";
     }
 
     public function table(Table $table): Table
@@ -332,8 +344,12 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                         TextInput::make('tag')
                             ->maxLength(255),
                         FileUpload::make('card_image')
+                            ->multiple()
                             ->disk('public')
-                            ->directory('designthumbs')
+                            ->directory(function ($get) {
+                                $name = $get('name');
+                                return $this->getphotospath($name);
+                            })
                             ->visibility('private'),
                         Select::make('category')
                             ->options(['Subwoofer' => 'Subwoofer', 'Full-Range' => 'Full-Range', 'Two-Way' => 'Two-Way'
@@ -356,7 +372,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                 $name = $get('name');
                                 return $this->getwidgetresponsepath($name);
                             }),
-                        FileUpload::make('Enclosure_Files')
+                        FileUpload::make('enclosure_files')
                             ->label('Enclosure Files')
                             ->multiple()
                             ->preserveFilenames()
@@ -364,7 +380,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                 $name = $get('name');
                                 return $this->getenclosurepath($name);
                             }),
-                        FileUpload::make('Electronic_Files')
+                        FileUpload::make('electronic_files')
                             ->label('Electronics Files')
                             ->multiple()
                             ->preserveFilenames()
@@ -372,7 +388,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                 $name = $get('name');
                                 return $this->getelectronicspath($name);
                             }),
-                        FileUpload::make('Design_Other_Files')
+                        FileUpload::make('design_other_files')
                             ->label('Other Design Files')
                             ->multiple()
                             ->preserveFilenames()

@@ -28,6 +28,9 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->json('bill_of_materials')->nullable();
             $table->json('frd_files')->nullable();
+            $table->json('enclosure_files')->nullable();
+            $table->json('electronic_files')->nullable();
+            $table->json('design_other_files')->nullable();
             $table->timestamps();
         });
     }
