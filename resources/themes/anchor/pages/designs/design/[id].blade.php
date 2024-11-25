@@ -34,7 +34,7 @@ new class extends Component {
                 <!-- Image section -->
                 <div class="lg:grid lg:grid-cols-2">
                 <div class="aspect-w-16 aspect-h-9 w-full align-middle rounded-lg mb-2 lg:mb-0">
-              <img src="{{$appUrl = config('app.url')}}/storage/{{ $card_image }}" alt="{{ $design->name }}" class="w-full h-auto">
+              <img src="{{$appUrl = config('app.url')}}/storage/{{ $design->card_image }}" alt="{{ $design->name }}" class="w-full h-auto">
                 </div>
 
                 <!-- Design info -->
