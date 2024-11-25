@@ -89,7 +89,7 @@ new class extends Component {
                     </div>
                 </div>
 {{--      End Key Details Section              --}}
-
+                </div>
                     {{-- Collapsible Public Section --}}
                     <div class="mt-8 col-span-2">
                         <button
