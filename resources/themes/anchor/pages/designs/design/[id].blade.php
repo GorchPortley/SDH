@@ -16,6 +16,7 @@ new class extends Component {
 }; ?>
 
 <x-layouts.marketing>
+
     @volt('design')
     <div class="bg-white dark:bg-zinc-900 dark:text-white">
         <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -122,41 +123,63 @@ new class extends Component {
                     </div>
         <livewire:frequency-response-viewer :design="$design" />
 </div>
+                @if(auth()->check())
+                    {{-- User is logged in --}}
+                    @if($design->price < 0.01 || $design->sales()->where('user_id', auth()->id())->exists() || auth()->user()->hasRole('admin'))
+                        <!-- Bill of Materials -->
+                        @if($design->bill_of_materials)
+                            <div class="mt-8 border-t border-gray-200 pt-8">
+                                <h2 class="text-xl font-semibold text-gray-900">Bill of Materials</h2>
+                                <div class="mt-4">
+                                    <ul class="divide-y divide-gray-200">
+                                        @foreach($design->bill_of_materials as $material=>$quantity)
+                                            <li class="py-3 flex justify-between">
+                                                <span class="text-gray-900">{{ $material ?? 'Unknown Item' }}</span>
+                                                <div class="flex items-center space-x-4">
+                                                    <span class="text-gray-500">x{{ $quantity }}</span>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </div>
+                        @endif
 
-                @if($design->price < 0.01 || $design->sales()->where('user_id', auth()->id())->exists() || auth()->user()->hasRole('admin'))
-                    <!-- Bill of Materials -->
-                    @if($design->bill_of_materials)
+                        <!-- Main Description -->
+                        @if($design->description)
+                            <div class="mt-8 border-t border-gray-200 pt-8">
+                                <h2 class="text-xl font-semibold text-gray-900">Full Description</h2>
+                                {!! str($design->description)->sanitizeHtml() !!}
+                            </div>
+                        @endif
+                    @else
+                        {{-- User is logged in but doesn't have access --}}
                         <div class="mt-8 border-t border-gray-200 pt-8">
-                            <h2 class="text-xl font-semibold text-gray-900">Bill of Materials</h2>
-                            <div class="mt-4">
-                                <ul class="divide-y divide-gray-200">
-                                    @foreach($design->bill_of_materials as $material=>$quantity)
-                                        <li class="py-3 flex justify-between">
-                                            <span class="text-gray-900">{{ $material ?? 'Unknown Item' }}</span>
-                                            <div class="flex items-center space-x-4">
-                                                <span class="text-gray-500">x{{ $quantity }}</span>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                            <div class="w-full bg-zinc-600 p-8 rounded-lg text-center">
+                                <p class="text-white text-lg">Sorry, you need Access for this section</p>
+                                <a href="{{ route('shop.show', $design->id) }}" class="mt-4 inline-block px-4 py-2 bg-white text-zinc-600 rounded-md hover:bg-zinc-100">
+                                    Purchase Access
+                                </a>
                             </div>
                         </div>
                     @endif
-
-                    <!-- Main Description -->
-                    @if($design->description)
-                        <div class="mt-8 border-t border-gray-200 pt-8">
-                            <h2 class="text-xl font-semibold text-gray-900">Full Description</h2>
-                            {!! str($design->description)->sanitizeHtml() !!}
+                @else
+                    {{-- Guest user --}}
+                    <div class="mt-8 border-t border-gray-200 pt-8">
+                        <div class="w-full bg-zinc-600 p-8 rounded-lg text-center">
+                            <p class="text-white text-lg">Sorry, you need to be logged in to access this section</p>
+                            <div class="mt-4 space-x-4">
+                                <a href="{{ route('login') }}" class="inline-block px-4 py-2 bg-white text-zinc-600 rounded-md hover:bg-zinc-100">
+                                    Login
+                                </a>
+                                <a href="{{ route('register') }}" class="inline-block px-4 py-2 bg-white text-zinc-600 rounded-md hover:bg-zinc-100">
+                                    Register
+                                </a>
+                            </div>
                         </div>
-                    @endif
+                    </div>
                 @endif
-                @if($design->sales()->where('user_id', auth()->id())->doesntExist() && !auth()->user()->hasRole('admin'))
-                    <div class="w-full bg-zinc-600 h-80">
-                        <p class="text-white align-middle justify-center">Sorry, you need Access for this section</p>
-                        <div>
-                            @endif
-                </div>
+
             </div>
         </main>
     </div>
