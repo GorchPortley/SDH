@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('name')->nullable();
             $table->string('tag')->nullable();
-            $table->string('card_image')->default('https://via.placeholder.com/150');
+            $table->string('card_image')->default('demo/800x800.jpg');
             $table->boolean('active')->default(false);
             $table->enum('category',
                 ['Subwoofer', 'Full-Range', 'Two-Way', 'Three-Way','Four-Way+','Portable', 'Esoteric', 'System']);
@@ -27,6 +27,7 @@ return new class extends Migration
             $table->text('summary');
             $table->longText('description')->nullable();
             $table->json('bill_of_materials')->nullable();
+            $table->json('frd_files')->nullable();
             $table->timestamps();
         });
     }

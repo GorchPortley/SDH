@@ -117,6 +117,18 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
         return "files/{$userId}/{$designName}/Other Files";
     }
 
+    function getwidgetresponsepath($name)
+    {
+        if (!$name) {
+            return 'files/lost files/lost widget response files';
+        }
+
+        $userId = auth()->id();
+        $designName = str($name);
+
+        return "files/widgetresponses/{$userId}/{$designName}/widget_responses";
+    }
+
     public function table(Table $table): Table
     {
         return $table
@@ -336,6 +348,14 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->numeric(),
                         TextInput::make('power')
                             ->numeric(),
+                        FileUpload::make('frd_files')
+                            ->label('Response Previews')
+                            ->multiple()
+                            ->preserveFilenames()
+                            ->directory(function ($get) {
+                                $name = $get('name');
+                                return $this->getwidgetresponsepath($name);
+                            }),
                         FileUpload::make('Enclosure_Files')
                             ->label('Enclosure Files')
                             ->multiple()

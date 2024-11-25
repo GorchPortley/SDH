@@ -25,12 +25,14 @@ class Design extends Model
         'power',
         'summary',
         'description',
-        'bill_of_materials'
+        'bill_of_materials',
+        'frd_files'
     ];
 
     protected $casts = [
         'active' => 'boolean',
         'bill_of_materials' => 'array',
+        'frd_files' => 'array',
     ];
 
     public function designer(): BelongsTo

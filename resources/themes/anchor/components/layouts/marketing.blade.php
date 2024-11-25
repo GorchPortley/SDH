@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     @include('theme::partials.head', ['seo' => ($seo ?? null) ])
+    @stack('head')
 </head>
 <body x-data class=" flex flex-col min-h-screen overflow-x-hidden @if($bodyClass ?? false){{ $bodyClass }}@endif" x-cloak>
 

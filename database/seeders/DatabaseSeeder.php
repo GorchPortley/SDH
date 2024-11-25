@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingsTableSeeder::class);
         $this->call(ProfileKeyValuesTableSeeder::class);
         $this->call(ThemesTableSeeder::class);
-        $this->call(DriverSeeder::class);
-        $this->call(DesignSeeder::class);
+        //$this->call(DriverSeeder::class);
+        //$this->call(DesignSeeder::class);
         fixPostgresSequence();
     }
 }

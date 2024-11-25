@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('driver_id');
             $table->enum('position', ['LF','LMF','MF','HMF','HF','Other']);
             $table->integer('quantity');
-            $table->decimal('low_frequency', 6, 2)->nullable();
-            $table->decimal('high_frequency', 6, 2)->nullable();
+            $table->decimal('low_frequency', 10, 2)->nullable();
+            $table->decimal('high_frequency', 10, 2)->nullable();
             $table->decimal('air_volume', 6, 2)->nullable();
             $table->longtext('description')->nullable();
             $table->json('specifications')->nullable();

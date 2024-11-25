@@ -120,6 +120,7 @@ new class extends Component {
                             {!! str($design->summary)->sanitizeHtml() !!}
                         </div>
                     </div>
+        <livewire:frequency-response-viewer :design="$design" />
 </div>
 
                 @if($design->price < 0.01 || $design->sales()->where('user_id', auth()->id())->exists() || auth()->user()->hasRole('admin'))
