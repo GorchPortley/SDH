@@ -193,33 +193,32 @@
                 </div>
             </div>
 
-            <!-- Main Content -->
-            <div class="lg:w-3/4 p-4 lg:p-6">
-                <!-- 16:9 Aspect Ratio Container -->
-                <div class="w-full relative bg-white rounded-lg shadow-sm" style="padding-top: 56.25%">
-                    <div class="absolute top-0 left-0 right-0 bottom-0 p-4">
+                <!-- Main Content -->
+                <div class="lg:w-3/4 p-4 lg:p-6">
+                    <!-- Content Container -->
+                    <div class="w-full h-full bg-white rounded-lg shadow-sm">
                         <!-- Tab Content -->
                         <div class="h-full">
                             <!-- Amplitude Response Tab -->
-                            <div x-show="activeTab === 'amplitude'" class="h-full">
+                            <div x-show="activeTab === 'amplitude'" class="h-full p-4">
                                 <h4 class="text-xl font-semibold mb-4">Amplitude Response</h4>
-                                <div class="h-[calc(100%-2rem)]">
+                                <div class="h-[500px] lg:h-[calc(100%-2rem)]">
                                     <canvas id="frequencyResponseChart"></canvas>
                                 </div>
                             </div>
 
                             <!-- Phase Response Tab -->
-                            <div x-show="activeTab === 'phase'" class="h-full">
+                            <div x-show="activeTab === 'phase'" class="h-full p-4">
                                 <h4 class="text-xl font-semibold mb-4">Phase Response</h4>
-                                <div class="h-[calc(100%-2rem)]">
+                                <div class="h-[500px] lg:h-[calc(100%-2rem)]">
                                     <canvas id="phaseResponseChart"></canvas>
                                 </div>
                             </div>
 
                             <!-- Future Content Tab -->
-                            <div x-show="activeTab === 'future'" class="h-full">
+                            <div x-show="activeTab === 'future'" class="h-full p-4">
                                 <h4 class="text-xl font-semibold mb-4">Future Content</h4>
-                                <div class="flex items-center justify-center h-[calc(100%-2rem)] bg-zinc-100 rounded-lg">
+                                <div class="flex items-center justify-center h-[500px] lg:h-[calc(100%-2rem)] bg-zinc-100 rounded-lg">
                                     <p class="text-zinc-500">Additional content coming soon...</p>
                                 </div>
                             </div>
@@ -229,4 +228,3 @@
             </div>
         </div>
     </div>
-</div>
