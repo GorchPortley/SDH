@@ -4,7 +4,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.js"></script>
     @endpush
 
-    <div class="w-full max-w-[1920px] mx-auto" x-data="{
+        <div class="w-full max-w-[1920px] mx-auto" x-data="{
             activeTab: 'amplitude',
             amplitudeData: @js($chartData),
             summedResponse: @js($summedResponse),
@@ -139,90 +139,91 @@
             initCharts();
         ">
 
-        <!-- Mobile Tabs (top) -->
-        <div class="lg:hidden w-full bg-zinc-800 p-4">
-            <div class="flex space-x-2 overflow-x-auto">
-                <button
-                    @click="activeTab = 'amplitude'; initCharts()"
-                    :class="{ 'bg-zinc-600': activeTab === 'amplitude' }"
-                    class="flex-shrink-0 px-4 py-2 rounded text-white hover:bg-zinc-700 transition-colors"
-                >
-                    Amplitude
-                </button>
-                <button
-                    @click="activeTab = 'phase'; initCharts()"
-                    :class="{ 'bg-zinc-600': activeTab === 'phase' }"
-                    class="flex-shrink-0 px-4 py-2 rounded text-white hover:bg-zinc-700 transition-colors"
-                >
-                    Phase
-                </button>
-                <button
-                    @click="activeTab = 'future'"
-                    :class="{ 'bg-zinc-600': activeTab === 'future' }"
-                    class="flex-shrink-0 px-4 py-2 rounded text-white hover:bg-zinc-700 transition-colors"
-                >
-                    Future
-                </button>
-            </div>
-        </div>
-
-        <!-- Desktop Layout -->
-        <div class="flex flex-col lg:flex-row">
-            <!-- Desktop Sidebar Tabs (left) -->
-            <div class="hidden lg:block lg:w-1/4 bg-zinc-800 p-4">
-                <div class="space-y-2">
+            <!-- Mobile Tabs (top) -->
+            <div class="lg:hidden w-full bg-zinc-800 p-4">
+                <div class="flex space-x-2 overflow-x-auto">
                     <button
                         @click="activeTab = 'amplitude'; initCharts()"
                         :class="{ 'bg-zinc-600': activeTab === 'amplitude' }"
-                        class="w-full text-left px-4 py-3 rounded text-white hover:bg-zinc-700 transition-colors"
+                        class="flex-shrink-0 px-4 py-2 rounded text-white hover:bg-zinc-700 transition-colors"
                     >
-                        Amplitude Response
+                        Amplitude
                     </button>
                     <button
                         @click="activeTab = 'phase'; initCharts()"
                         :class="{ 'bg-zinc-600': activeTab === 'phase' }"
-                        class="w-full text-left px-4 py-3 rounded text-white hover:bg-zinc-700 transition-colors"
+                        class="flex-shrink-0 px-4 py-2 rounded text-white hover:bg-zinc-700 transition-colors"
                     >
-                        Phase Response
+                        Phase
                     </button>
                     <button
                         @click="activeTab = 'future'"
                         :class="{ 'bg-zinc-600': activeTab === 'future' }"
-                        class="w-full text-left px-4 py-3 rounded text-white hover:bg-zinc-700 transition-colors"
+                        class="flex-shrink-0 px-4 py-2 rounded text-white hover:bg-zinc-700 transition-colors"
                     >
-                        Future Content
+                        Future
                     </button>
                 </div>
             </div>
 
-            <!-- Main Content -->
-            <div class="lg:w-3/4 p-4 lg:p-6">
-                <!-- 16:9 Aspect Ratio Container -->
-                <div class="w-full relative" style="padding-top: 56.25%">
-                    <div class="absolute top-0 left-0 right-0 bottom-0">
-                        <!-- Tab Content -->
-                        <div class="h-full">
-                            <!-- Amplitude Response Tab -->
-                            <div x-show="activeTab === 'amplitude'" class="h-full">
-                                <h4 class="text-xl font-semibold mb-4">Amplitude Response</h4>
-                                <div class="h-[calc(100%-2rem)]">
-                                    <canvas id="frequencyResponseChart"></canvas>
-                                </div>
-                            </div>
+            <!-- Desktop Layout -->
+            <div class="flex flex-col lg:flex-row">
+                <!-- Desktop Sidebar Tabs (left) -->
+                <div class="hidden lg:block lg:w-1/4 bg-zinc-800 p-4">
+                    <div class="space-y-2">
+                        <button
+                            @click="activeTab = 'amplitude'; initCharts()"
+                            :class="{ 'bg-zinc-600': activeTab === 'amplitude' }"
+                            class="w-full text-left px-4 py-3 rounded text-white hover:bg-zinc-700 transition-colors"
+                        >
+                            Amplitude Response
+                        </button>
+                        <button
+                            @click="activeTab = 'phase'; initCharts()"
+                            :class="{ 'bg-zinc-600': activeTab === 'phase' }"
+                            class="w-full text-left px-4 py-3 rounded text-white hover:bg-zinc-700 transition-colors"
+                        >
+                            Phase Response
+                        </button>
+                        <button
+                            @click="activeTab = 'future'"
+                            :class="{ 'bg-zinc-600': activeTab === 'future' }"
+                            class="w-full text-left px-4 py-3 rounded text-white hover:bg-zinc-700 transition-colors"
+                        >
+                            Future Content
+                        </button>
+                    </div>
+                </div>
 
-                            <!-- Phase Response Tab -->
-                            <div x-show="activeTab === 'phase'" class="h-full">
-                                <h4 class="text-xl font-semibold mb-4">Phase Response</h4>
-                                <div class="h-[calc(100%-2rem)]">
-                                    <canvas id="phaseResponseChart"></canvas>
+                <!-- Main Content -->
+                <div class="lg:w-3/4 p-4 lg:p-6">
+                    <!-- 16:9 Aspect Ratio Container -->
+                    <div class="w-full relative" style="padding-top: 56.25%">
+                        <div class="absolute top-0 left-0 right-0 bottom-0">
+                            <!-- Tab Content -->
+                            <div class="h-full">
+                                <!-- Amplitude Response Tab -->
+                                <div x-show="activeTab === 'amplitude'" class="h-full">
+                                    <h4 class="text-xl font-semibold mb-4">Amplitude Response</h4>
+                                    <div class="h-[calc(100%-2rem)]">
+                                        <canvas id="frequencyResponseChart"></canvas>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Future Content Tab -->
-                            <div x-show="activeTab === 'future'" class="h-full">
-                                <h4 class="text-xl font-semibold mb-4">Future Content</h4>
-                                <div class="flex items-center justify-center h-[calc(100%-2rem)] bg-zinc-100 rounded-lg">
-                                    <p class="text-zinc-500">Additional content coming soon...</p>
+                                <!-- Phase Response Tab -->
+                                <div x-show="activeTab === 'phase'" class="h-full">
+                                    <h4 class="text-xl font-semibold mb-4">Phase Response</h4>
+                                    <div class="h-[calc(100%-2rem)]">
+                                        <canvas id="phaseResponseChart"></canvas>
+                                    </div>
+                                </div>
+
+                                <!-- Future Content Tab -->
+                                <div x-show="activeTab === 'future'" class="h-full">
+                                    <h4 class="text-xl font-semibold mb-4">Future Content</h4>
+                                    <div class="flex items-center justify-center h-[calc(100%-2rem)] bg-zinc-100 rounded-lg">
+                                        <p class="text-zinc-500">Additional content coming soon...</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -230,6 +231,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
-```
