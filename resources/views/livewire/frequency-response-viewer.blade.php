@@ -24,8 +24,7 @@
                     borderColor: '#000000',
                     borderWidth: 2,
                     borderDash: [5, 5],
-                    fill: false,
-                    cubicinterpolationMode: 'true'
+                    fill: false
                 });
             }
 
@@ -36,7 +35,7 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
                     scales: {
                         x: {
                             type: 'logarithmic',
@@ -105,7 +104,7 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio: false,
+                    maintainAspectRatio: true,
                     scales: {
                         x: {
                             type: 'logarithmic',
