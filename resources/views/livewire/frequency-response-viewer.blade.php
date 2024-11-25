@@ -194,7 +194,7 @@
             </div>
 
                 <!-- Main Content -->
-                <div class="lg:w-3/4 p-4 lg:p-6">
+                <div class="w-full p-4 lg:p-6">
                     <!-- Content Container -->
                     <div class="w-full h-full bg-white rounded-lg shadow-sm">
                         <!-- Tab Content -->
