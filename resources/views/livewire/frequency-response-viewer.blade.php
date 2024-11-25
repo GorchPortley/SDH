@@ -140,27 +140,27 @@
         <!-- Mobile Tabs (top) -->
         <div class="lg:hidden w-full bg-zinc-800 p-4">
             <div class="flex space-x-2 overflow-x-auto">
-                <button
+                <x-button
                     @click="activeTab = 'amplitude'; initCharts()"
                     :class="{ 'bg-zinc-600': activeTab === 'amplitude' }"
                     class="flex-shrink-0 px-4 py-2 rounded text-white hover:bg-zinc-700 transition-colors"
                 >
                     Amplitude
-                </button>
-                <button
+                </x-button>
+                <x-button
                     @click="activeTab = 'phase'; initCharts()"
                     :class="{ 'bg-zinc-600': activeTab === 'phase' }"
                     class="flex-shrink-0 px-4 py-2 rounded text-white hover:bg-zinc-700 transition-colors"
                 >
                     Phase
-                </button>
-                <button
+                </x-button>
+                <x-button
                     @click="activeTab = 'future'"
                     :class="{ 'bg-zinc-600': activeTab === 'future' }"
                     class="flex-shrink-0 px-4 py-2 rounded text-white hover:bg-zinc-700 transition-colors"
                 >
                     Future
-                </button>
+                </x-button>
             </div>
         </div>
 
@@ -169,32 +169,32 @@
             <!-- Desktop Sidebar Tabs (left) -->
             <div class="hidden lg:block lg:w-1/4 bg-zinc-800 p-4">
                 <div class="space-y-2">
-                    <button
+                    <x-button
                         @click="activeTab = 'amplitude'; initCharts()"
                         :class="{ 'bg-zinc-600': activeTab === 'amplitude' }"
-                        class="w-full text-left px-4 py-3 rounded text-white hover:bg-zinc-700 transition-colors"
+                        class=""
                     >
                         Amplitude Response
-                    </button>
-                    <button
+                    </x-button>
+                    <x-button
                         @click="activeTab = 'phase'; initCharts()"
                         :class="{ 'bg-zinc-600': activeTab === 'phase' }"
-                        class="w-full text-left px-4 py-3 rounded text-white hover:bg-zinc-700 transition-colors"
+                        class=""
                     >
                         Phase Response
-                    </button>
-                    <button
+                    </x-button>
+                    <x-button
                         @click="activeTab = 'future'"
                         :class="{ 'bg-zinc-600': activeTab === 'future' }"
-                        class="w-full text-left px-4 py-3 rounded text-white hover:bg-zinc-700 transition-colors"
+                        class=""
                     >
                         Future Content
-                    </button>
+                    </x-button>
                 </div>
             </div>
 
                 <!-- Main Content -->
-                <div class="w-full p-4 lg:p-6">
+                <div class="w-full rounded-lg p-4 lg:p-6">
                     <!-- Content Container -->
                     <div class="w-full h-full bg-white rounded-lg shadow-sm">
                         <!-- Tab Content -->

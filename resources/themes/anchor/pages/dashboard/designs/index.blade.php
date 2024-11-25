@@ -126,7 +126,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
         $userId = auth()->id();
         $designName = str($name);
 
-        return "files/widgetresponses/{$userId}/{$designName}/widget_responses";
+        return "files/{$userId}/{$designName}/widget_responses";
     }
 
     public function table(Table $table): Table
