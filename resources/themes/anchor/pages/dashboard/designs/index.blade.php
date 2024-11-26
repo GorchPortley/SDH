@@ -4,6 +4,7 @@
 use App\Models\Design;
 use App\Models\Driver;
 use App\Models\DesignDriver;
+use Dotswan\FilamentGrapesjs\Fields\GrapesJs;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Placeholder;
@@ -282,88 +283,6 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
             ])
             ->defaultSort('created_at', 'desc')
             ->actions([
-                ViewAction::make()
-                    ->form([
-                        Toggle::make('active')
-                            ->onColor('success'),
-                        TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
-                        TextInput::make('tag')
-                            ->maxLength(255),
-                        Select::make('category')
-                            ->options(['Subwoofer' => 'Subwoofer', 'Full-Range' => 'Full-Range', 'Two-Way' => 'Two-Way'
-                                , 'Three-Way' => 'Three-Way', 'Four-Way+' => 'Four-Way+', 'Portable' => 'Portable', 'Esoteric' => 'Esoteric']),
-                        TextInput::make('price')
-                            ->inputMode('decimal')
-                            ->numeric(),
-                        TextInput::make('build_cost')
-                            ->inputMode('decimal')
-                            ->numeric(),
-                        TextInput::make('impedance')
-                            ->numeric(),
-                        TextInput::make('power')
-                            ->numeric(),
-                        RichEditor::make('summary')
-                            ->fileAttachmentsDirectory(function ($get) {
-                                $name = $get('name');
-                                return $this->getsummaryattachmentspath($name);
-                            })
-                            ->columns(2),
-                        RichEditor::make('description')
-                            ->fileAttachmentsDirectory(function ($get) {
-                                $name = $get('name');
-                                return $this->getdescriptionattachmentspath($name);
-                            })
-                            ->columns(2),
-                        KeyValue::make('bill_of_materials'),
-                        Repeater::make('components')
-                            ->collapsible()
-                            ->relationship()
-                            ->itemLabel(fn(array $state): ?string => $state['position'] ?? null)
-                            ->schema([
-                                Select::make('driver_id')
-                                    ->searchable(['brand', 'model'])
-                                    ->searchPrompt('Search by Brand or Model')
-                                    ->options(Driver::where('active', 1)->select('id', 'brand', 'model', 'size', 'category')->get()->mapWithKeys(function ($driver) {
-                                        return [$driver->id => $driver->brand . ' ' . $driver->model . ': ' . $driver->size . ' inch ' . $driver->category];
-                                    }))
-                                    ->preload()
-                                    ->native(false)
-                                    ->label('Driver'),
-                                Select::make('position')
-                                    ->options(['LF' => 'LF', 'LMF' => 'LMF', 'MF' => 'MF', 'HMF' => 'HMF', 'HF' => 'HF', 'Other' => 'Other']),
-                                TextInput::make('quantity')
-                                    ->numeric(),
-                                TextInput::make('low_frequency')
-                                    ->numeric(),
-                                TextInput::make('high_frequency')
-                                    ->numeric(),
-                                TextInput::make('air_volume')
-                                    ->numeric(),
-                                RichEditor::make('description')
-                                    ->fileAttachmentsDirectory('attachments'),
-                                KeyValue::make('specifications')
-                                    ->default([
-                                        'fs' => '',
-                                        'qts' => '',
-                                        'vas' => '',
-                                        'xmax' => '',
-                                        'le' => '',
-                                        're' => '',
-                                        'bl' => '',
-                                        'sd' => '',
-                                        'mms' => '',
-                                        'cms' => '',
-                                    ])
-                                    ->addable(false)
-                                    ->deletable(false)
-                                    ->reorderable(false)
-                                    ->editableKeys(false)
-                                    ->keyLabel('Parameter')
-                                    ->valueLabel('Value')
-                            ])
-                    ]),
                 EditAction::make()
                     ->form([
                         Toggle::make('active')
@@ -424,12 +343,15 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                 $name = $get('name');
                                 return $this->getdesignotherpath($name);
                             }),
-                        RichEditor::make('summary')
-                            ->fileAttachmentsDirectory('attachments')
-                            ->columns(2),
-                        RichEditor::make('description')
-                            ->fileAttachmentsDirectory('attachments')
-                            ->columns(2),
+                        Textarea::make('summary')
+                            ->rows(10)
+                            ->required()
+                            ->columnSpanFull()
+                            ->id('summary'),
+                        Textarea::make('description')
+                            ->rows(10)
+                            ->required()
+                            ->columnSpanFull(),
                         KeyValue::make('bill_of_materials'),
                         Repeater::make('components')
                             ->collapsible()
@@ -463,8 +385,8 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                     ->directory(function ($get) {
                                         $name = $get('../../name');
                                         $position = $get('position');
-                                    return $this->getfrqpath($name, $position);
-                                }),
+                                        return $this->getfrqpath($name, $position);
+                                    }),
                                 FileUpload::make('Impedance_Files')
                                     ->label('Impedance Measurements')
                                     ->multiple()
@@ -472,8 +394,8 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                     ->directory(function ($get) {
                                         $name = $get('../../name');
                                         $position = $get('position');
-                                    return $this->getzpath($name, $position);
-                                }),
+                                        return $this->getzpath($name, $position);
+                                    }),
                                 FileUpload::make('Other_Files')
                                     ->label('Other Files')
                                     ->multiple()
@@ -481,8 +403,8 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                     ->directory(function ($get) {
                                         $name = $get('../../name');
                                         $position = $get('position');
-                                    return $this->getotherpath($name, $position);
-                                }),
+                                        return $this->getotherpath($name, $position);
+                                    }),
                                 RichEditor::make('description')
                                     ->fileAttachmentsDirectory('attachments'),
                                 KeyValue::make('specifications')
