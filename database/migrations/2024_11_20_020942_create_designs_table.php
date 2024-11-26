@@ -16,15 +16,15 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('name')->nullable();
             $table->string('tag')->nullable();
-            $table->string('card_image')->default('demo/800x800.jpg');
+            $table->string('card_image')->default('demo/800x800.jpg')->nullable();
             $table->boolean('active')->default(false);
             $table->enum('category',
                 ['Subwoofer', 'Full-Range', 'Two-Way', 'Three-Way','Four-Way+','Portable', 'Esoteric', 'System']);
-            $table->decimal('price', 8, 2)->default(0);
+            $table->decimal('price', 8, 2)->default(0)->nullable();
             $table->decimal('build_cost', 8, 2)->default(0)->nullable();
-            $table->integer('impedance')->default(4);
+            $table->integer('impedance')->default(4)->nullable();
             $table->integer('power')->nullable();
-            $table->text('summary');
+            $table->text('summary')->nullable();
             $table->longText('description')->nullable();
             $table->json('bill_of_materials')->nullable();
             $table->json('frd_files')->nullable();
