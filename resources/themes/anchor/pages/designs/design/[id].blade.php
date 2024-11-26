@@ -89,7 +89,7 @@ new class extends Component {
                     </div>
                 </div>
 {{--      End Key Details Section              --}}
-
+                </div>
                     {{-- Collapsible Public Section --}}
                     <div class="mt-8 col-span-2">
                         <button
@@ -130,6 +130,11 @@ new class extends Component {
                             @if(auth()->check())
                                 @if($design->price < 0.01 || $design->sales()->where('user_id', auth()->id())->exists() || auth()->user()->hasRole('admin'))
                                     <!-- Bill of Materials -->
+                                    @if($design->description)
+                                        <div class="mt-8 border-t border-gray-200 pt-8">
+                                            <x-safe-html-renderer :content="$design->description" />
+                                        </div>
+                                    @endif
                                     @if($design->bill_of_materials)
                                         <div class="mt-8 border-t border-gray-200 pt-8">
                                             <h2 class="text-xl font-semibold text-gray-900">Bill of Materials</h2>
@@ -149,12 +154,7 @@ new class extends Component {
                                     @endif
 
                                     <!-- Main Description -->
-                                    @if($design->description)
-                                        <div class="mt-8 border-t border-gray-200 pt-8">
-                                            <h2 class="text-xl font-semibold text-gray-900">Full Description</h2>
-                                            <x-safe-html-renderer :content="$design->description" />
-                                        </div>
-                                    @endif
+
                                 @else
                                     {{-- User is logged in but doesn't have access --}}
                                     <div class="mt-8 border-t border-gray-200 pt-8">
