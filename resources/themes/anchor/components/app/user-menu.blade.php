@@ -20,6 +20,7 @@
         x-cloak>
         <div class="pt-0 mt-1 bg-white border dark:border-zinc-700 text-zinc-600 dark:text-white/70 dark:bg-zinc-900 dark:shadow-xl sm:space-y-0.5 sm:border shadow-md rounded-xl border-zinc-200/70 dark:border-white/10">
             <div class="relative flex flex-col p-2 space-y-1">
+                <x-app.light-dark-toggle />
                 <x-app.sidebar-link :hideUntilGroupHover="false" href="{{ route('dashboard') }}" icon="phosphor-house" active="false">Dashboard</x-app.sidebar-link>
                 <x-app.sidebar-link :hideUntilGroupHover="false" href="{{ route('notifications') }}" icon="phosphor-bell-duotone" active="false">Notifications</x-app.sidebar-link>
                 <x-app.sidebar-link :hideUntilGroupHover="false" href="{{ '/profile/' . auth()->user()->username }}" icon="phosphor-planet-duotone" active="false">Public Profile</x-app.sidebar-link>
