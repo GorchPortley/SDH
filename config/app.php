@@ -201,6 +201,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\VoltServiceProvider::class,
         App\Providers\FolioServiceProvider::class,
+        App\Providers\FlarumSSOServiceProvider::class,
 
         \DevDojo\Themes\ThemesServiceProvider::class,
 
