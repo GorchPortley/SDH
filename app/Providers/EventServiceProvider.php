@@ -21,7 +21,7 @@ class EventServiceProvider extends ServiceProvider
          ],
 
         \Illuminate\Auth\Events\Login::class => [
-            \App\Listeners\FlarumLoginListener::class,
+            \App\Listeners\UserLoggedIn::class,
         ],
 
     ];

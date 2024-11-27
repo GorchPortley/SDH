@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Maicol07\SSO\Flarum;
 
@@ -16,6 +15,7 @@ class UserRegistered
             'url' => env('FLARUM_URL'),
             'api_key' => env('FLARUM_API_KEY'),
             'password_token' => env('FLARUM_PASSWORD_TOKEN'),
+            'root_domain' => env('APP_URL'),
         ];
 
         try {
