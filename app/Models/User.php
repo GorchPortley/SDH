@@ -71,44 +71,7 @@ class User extends WaveUser
             $user->assignRole( config('wave.default_user_role', 'registered') );
         });
 
-        static::created(function ($user) {
-            try {
-                $flarum = new Flarum([
-                    'url' => env('FLARUM_URL'),
-                    'api_key' => env('FLARUM_API_KEY'),
-                    'password_token' => env('FLARUM_PASSWORD_TOKEN'),
-                    'setCookie' => true
-                ]);
-
-                $flarum_user = $flarum->user($user->username);
-                $flarum_user->attributes->username = $user->username;
-                $flarum_user->attributes->email = $user->email;
-                $flarum_user->attributes->password = $user->password;
-                $flarum_user->signUp();
-            } catch (\Exception $e) {
-                report($e);
-            }
-        });
-
-        static::retrieved(function ($user) {
-            try {
-                if (auth()->check() && auth()->id() === $user->id) {
-                    $flarum = new Flarum([
-                        'url' => env('FLARUM_URL'),
-                        'api_key' => env('FLARUM_API_KEY'),
-                        'password_token' => env('FLARUM_PASSWORD_TOKEN'),
-                        'setCookie' => true
-                    ]);
-
-                    $flarum_user = $flarum->user($user->username);
-                    $flarum_user->attributes->username = $user->username;
-                    $flarum_user->attributes->email = $user->email;
-                    $flarum_user->login();
-                }
-            } catch (\Exception $e) {
-                report($e);
-            }
-        });
+        
     }
 
     public function designs(): HasMany
