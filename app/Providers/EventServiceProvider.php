@@ -20,10 +20,6 @@ class EventServiceProvider extends ServiceProvider
              \App\Listeners\UserRegistered::class
          ],
 
-        \Illuminate\Auth\Events\Login::class => [
-            \App\Listeners\UserLoggedIn::class,
-        ],
-
     ];
 
     /**
