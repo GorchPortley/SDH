@@ -15,7 +15,7 @@ class UserRegistered
         $user = $event->user;
 
         Log::info('Starting Flarum SSO registration for user:', [
-            'username' => $user->username,
+            'username' => $user->name,
             'email' => $user->email
         ]);
 
