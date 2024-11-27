@@ -12,9 +12,9 @@ new class extends Component {
 
     public $drivers = [];
 
-    public function mount()
+    public function mount($drivers)
     {
-        $this->drivers = Driver::query()
+        $this->$drivers = Driver::query()
             ->where('active', 1)
             ->get();
     }
