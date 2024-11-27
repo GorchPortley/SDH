@@ -207,6 +207,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-debugbar" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/maximebf/debugbar" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/unisharp/laravel-filemanager" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/delight-im/cookie" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/delight-im/http" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/maicol07/flarum-api-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/maicol07/flarum-sso-plugin" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/mistic100/php-hooks" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

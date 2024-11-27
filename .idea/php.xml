@@ -209,6 +209,11 @@
       <path value="$PROJECT_DIR$/vendor/unisharp/laravel-filemanager" />
       <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
+      <path value="$PROJECT_DIR$/vendor/mistic100/php-hooks" />
+      <path value="$PROJECT_DIR$/vendor/delight-im/cookie" />
+      <path value="$PROJECT_DIR$/vendor/delight-im/http" />
+      <path value="$PROJECT_DIR$/vendor/maicol07/flarum-sso-plugin" />
+      <path value="$PROJECT_DIR$/vendor/maicol07/flarum-api-client" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
