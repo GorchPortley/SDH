@@ -381,7 +381,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                     ->collapsed()
                                     ->collapsible()
                                     ->schema([
-                                        FileUpload::make('Frequency_Files')
+                                        FileUpload::make('frequency_files')
                                         ->label('Frequency Measurements')
                                         ->multiple()
                                         ->preserveFilenames()
@@ -391,7 +391,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                             return $this->getfrqpath($name, $position);
                                         }),
 
-                                        FileUpload::make('Impedance_Files')
+                                        FileUpload::make('impedance_files')
                                             ->label('Impedance Measurements')
                                             ->multiple()
                                             ->preserveFilenames()
@@ -401,7 +401,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                                 return $this->getzpath($name, $position);
                                             }),
 
-                                        FileUpload::make('Other_Files')
+                                        FileUpload::make('other_files')
                                             ->label('Other Files')
                                             ->multiple()
                                             ->preserveFilenames()
@@ -636,7 +636,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                         ->collapsed()
                                         ->collapsible()
                                         ->schema([
-                                            FileUpload::make('Frequency_Files')
+                                            FileUpload::make('frequency_files')
                                                 ->label('Frequency Measurements')
                                                 ->multiple()
                                                 ->preserveFilenames()
@@ -646,7 +646,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                                     return $this->getfrqpath($name, $position);
                                                 }),
 
-                                            FileUpload::make('Impedance_Files')
+                                            FileUpload::make('impedance_files')
                                                 ->label('Impedance Measurements')
                                                 ->multiple()
                                                 ->preserveFilenames()
@@ -656,7 +656,7 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                                                     return $this->getzpath($name, $position);
                                                 }),
 
-                                            FileUpload::make('Other_Files')
+                                            FileUpload::make('other_files')
                                                 ->label('Other Files')
                                                 ->multiple()
                                                 ->preserveFilenames()

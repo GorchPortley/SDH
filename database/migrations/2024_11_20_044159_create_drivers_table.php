@@ -28,6 +28,9 @@ return new class extends Migration
             $table->text('summary')->nullable();
             $table->longText('description')->nullable();
             $table->json('factory_specs')->nullable();
+            $table->json('frequency_files')->nullable();
+            $table->json('impedance_files')->nullable();
+            $table->json('other_files')->nullable();
             $table->timestamps();
         });
     }

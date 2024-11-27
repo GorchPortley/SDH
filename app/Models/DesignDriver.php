@@ -16,11 +16,17 @@ class DesignDriver extends Pivot
             'high_frequency',
             'air_volume',
             'description',
-            'specifications'
+            'specifications',
+            'frequency_files',
+            'impedance_files',
+            'other_files'
         ];
 
     protected $casts = [
-        'specifications' => 'array'
+        'specifications' => 'array',
+        'frequency_files' => 'array',
+        'impedance_files' => 'array',
+        'other_files' => 'array'
     ];
 
     public function design(): BelongsTo

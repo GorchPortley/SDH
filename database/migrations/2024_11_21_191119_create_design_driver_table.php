@@ -22,6 +22,9 @@ return new class extends Migration
             $table->decimal('air_volume', 6, 2)->nullable();
             $table->longtext('description')->nullable();
             $table->json('specifications')->nullable();
+            $table->json('frequency_files')->nullable();
+            $table->json('impedance_files')->nullable();
+            $table->json('other_files')->nullable();
             $table->timestamps();
         });
     }
