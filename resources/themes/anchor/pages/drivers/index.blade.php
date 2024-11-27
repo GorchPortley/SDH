@@ -10,7 +10,7 @@ name('drivers');
 
 new class extends Component {
 
-    public $drivers;
+    public $drivers = [];
 
     public function mount()
     {
