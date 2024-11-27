@@ -24,7 +24,7 @@ class UserRegistered
             $flarum_user->attributes->email = $user->email;
             $flarum_user->attributes->password = $user->password;
             $flarum_user->attributes->username = $user->username;
-            $flarum_user->register();
+            $flarum_user->signup();
         } catch (\Exception $e) {
             report($e);
         }
