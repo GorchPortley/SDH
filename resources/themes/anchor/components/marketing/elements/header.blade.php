@@ -93,6 +93,7 @@
                 <!-- Only show on medium screens and up -->
                 <div class="hidden md:flex flex-row">
                     <x-app.user-menu position="top"/>
+                    <x-app.light-dark-toggle />
                     <x-button href="{{ route('cart') }}" tag="a" class="m-2" icon="phosphor-shopping-cart" badge="{{auth()->user()->load('cart.items')->cart?->items->count() ?? null}}"/>
                 </div>
             @endguest
