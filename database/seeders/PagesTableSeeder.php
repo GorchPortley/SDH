@@ -14,18 +14,18 @@ class PagesTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('pages')->delete();
-        
+
         \DB::table('pages')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'author_id' => 1,
                 'title' => 'Example Page',
                 'excerpt' => 'This is an example page. Create a page in the Wave admin and have it show up on the site.',
-                'body' => '<p>This is an example page to showcase how a simple page can be created. You\'ll notice that this page also routes to a URL on your website. In this case the URL is mapped to `/example-page`. You can create as many pages as you would like.</p><h3>Creating Pages</h3><p>To create a new page you can simply visit the admin section at `/admin/pages`. You can then create a new page and add content. Here are some advantages of creating the page inside the admin.</p><ul><li>Automatically routes to a URL</li><li>Simple to create new pages</li><li>Simple to edit page</li><li>Many more</li></ul><p>You can feel free to create a page via the admin or you can create the page by adding it to your themes pages directory. The choice is yours.</p><h3>Quick Warning</h3><p>If you create a page inside the admin that has a slug of `about` and then you create a page inside your theme directory at `/pages/about/index.blade.php`. The two pages will conflict and you\'ll only see it from your themes page directory. Just make sure you only create the page in one location.</p>',
+                'body' => '<p>This is an example page to showcase how a simple page can be created. You\'ll notice that this page also routes to a URL on your website. In this case the URL is mapped to `/example-page`. You can create as many pages as you would like.</p><h3>Creating Pages</h3><p>To create a new page you can simply visit the admin section at `/admin/pages`. You can then create a new page and add content. Here are some advantages of creating the page inside the admin.</p><ul><li>Automatically routes to a URL</li><li>Simple to create new pages</li><li>Simple to edit page</li><li>Many more</li></ul><p>You can feel free to create a page via the admin or you can create the page by adding it to your themes pages directory. The choice is yours.</p><h3>Quick Warning</h3><p>If you create a page inside the admin that has a slug of `about` and then you create a page inside your theme directory at `/pages/about/index.php`. The two pages will conflict and you\'ll only see it from your themes page directory. Just make sure you only create the page in one location.</p>',
                 'image' => NULL,
                 'slug' => 'example-page',
                 'meta_description' => 'This is a simple meta description for SEO purposes',
@@ -34,7 +34,7 @@ class PagesTableSeeder extends Seeder
                 'created_at' => '2017-11-21 16:23:23',
                 'updated_at' => '2017-11-21 16:23:23',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
                 'author_id' => 1,
@@ -50,7 +50,7 @@ class PagesTableSeeder extends Seeder
                 'updated_at' => '2018-03-30 03:04:51',
             ),
         ));
-        
-        
+
+
     }
 }
