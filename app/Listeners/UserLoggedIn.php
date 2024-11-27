@@ -5,6 +5,7 @@ namespace App\Listeners;
 use Illuminate\Auth\Events\Login;
 use Maicol07\SSO\Flarum;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cookie;
 
 class UserLoggedIn
 {
@@ -21,6 +22,7 @@ class UserLoggedIn
             'url' => env('FLARUM_URL'),
             'api_key' => env('FLARUM_API_KEY'),
             'password_token' => env('FLARUM_PASSWORD_TOKEN'),
+            'setCookie' => true  // Make sure cookie setting is enabled
         ];
 
         Log::info('SSO Options:', $options);
@@ -34,8 +36,14 @@ class UserLoggedIn
             $flarum_user->attributes->email = $user->email;
 
             Log::info('Attempting Flarum login');
-            $response = $flarum_user->login();
-            Log::info('Flarum login response:', ['response' => $response]);
+            $token = $flarum_user->login();
+
+            // Manually set the token cookie if needed
+            if ($token) {
+                $cookie = cookie('flarum_remember', $token, 60 * 24 * 30, '/', null, false, true);
+                Cookie::queue($cookie);
+                Log::info('Flarum token cookie set:', ['token' => $token]);
+            }
 
         } catch (\Exception $e) {
             Log::error('Flarum SSO Login Error:', [
@@ -44,4 +52,5 @@ class UserLoggedIn
             ]);
             report($e);
         }
-}}
+    }
+}
