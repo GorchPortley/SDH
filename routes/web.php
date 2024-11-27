@@ -21,8 +21,3 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
-Route::prefix('forum')->group(function () {
-    Route::any('{path?}', function ($path = null) {
-        require base_path('forum/index.php');
-    })->where('path', '.*');
-});
