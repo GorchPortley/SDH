@@ -106,6 +106,10 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->numeric(),
                         TextInput::make('link')
                             ->url(),
+                        FileUpload::make('card_image')
+                            ->label('Driver Image')
+                            ->preserveFilenames()
+                            ->directory('attachments'),
                         Section::make('Driver File Uploads')
                             ->description('Upload the working files used to design your speaker')
                             ->collapsed()
@@ -216,6 +220,9 @@ new class extends Component implements HasForms, Tables\Contracts\HasTable {
                             ->numeric(),
                         TextInput::make('link')
                             ->url(),
+                        FileUpload::make('card_image')
+                            ->label('Driver Image')
+                            ->directory('attachments'),
                         Section::make('Driver File Uploads')
                             ->description('Upload the working files used to design your speaker')
                             ->collapsed()

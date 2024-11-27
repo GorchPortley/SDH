@@ -56,10 +56,16 @@
             <nav :class="{ 'hidden' : !mobileMenuOpen, 'block md:relative absolute top-0 left-0 md:w-auto w-screen md:h-auto h-screen pointer-events-none md:z-10 z-10' : mobileMenuOpen }" class=" md:flex">
                 <ul :class="{ 'hidden md:flex' : !mobileMenuOpen, 'flex flex-col absolute md:relative md:w-auto w-screen h-full md:h-full md:overflow-auto overflow-scroll md:pt-0 mt-12 md:pb-0 pb-48 bg-white md:bg-transparent' : mobileMenuOpen }" id="menu" class="flex items-stretch justify-start flex-1 w-full h-full ml-0 border-t border-gray-100 pointer-events-auto md:items-center md:justify-center gap-x-8 md:w-auto md:border-t-0 md:flex-row">
                     <li class="flex-shrink-0 h-16 border-b border-gray-100 md:border-b-0 md:h-full">
-                        <a href="{{ route('designs') }}" class="flex items-center h-full text-sm font-semibold text-gray-400 transition duration-300 md:px-0 px-7 hover:bg-gray-100 md:hover:bg-transparent hover:text-gray-100">Designs</a>
+                        <a href="{{ route('designs') }}" class="flex items-center h-full text-sm font-semibold text-gray-400 transition duration-300 md:px-0 px-7 hover:bg-gray-100 md:hover:bg-transparent hover:text-gray-100">Design Database</a>
                     </li>
                     <li class="flex-shrink-0 h-16 border-b border-gray-100 md:border-b-0 md:h-full">
-                        <a href="{{ route('blog') }}" class="flex items-center h-full text-sm font-semibold text-gray-400 transition duration-300 md:px-0 px-7 hover:bg-gray-100 md:hover:bg-transparent hover:text-gray-100">Blog</a>
+                        <a href="{{ route('drivers') }}" class="flex items-center h-full text-sm font-semibold text-gray-400 transition duration-300 md:px-0 px-7 hover:bg-gray-100 md:hover:bg-transparent hover:text-gray-100">Driver Database</a>
+                    </li>
+                    <li class="flex-shrink-0 h-16 border-b border-gray-100 md:border-b-0 md:h-full">
+                        <a href="{{ route('blog') }}" class="flex items-center h-full text-sm font-semibold text-gray-400 transition duration-300 md:px-0 px-7 hover:bg-gray-100 md:hover:bg-transparent hover:text-gray-100">SoapBox</a>
+                    </li>
+                    <li class="flex-shrink-0 h-16 border-b border-gray-100 md:border-b-0 md:h-full">
+                        <a href="#" class="flex items-center h-full text-sm font-semibold text-gray-400 transition duration-300 md:px-0 px-7 hover:bg-gray-100 md:hover:bg-transparent hover:text-gray-100">Community Forum</a>
                     </li>
                     @guest
                         <li class="relative z-30 flex flex-col items-center justify-center flex-shrink-0 w-full h-auto pt-3 space-y-3 text-sm md:hidden px-7">

@@ -29,14 +29,16 @@ class Driver extends Model
         'factory_specs',
         'frequency_files',
         'impedance_files',
-        'other_files'
+        'other_files',
+        'card_image'
     ];
     protected $casts = [
         'active' => 'boolean',
         'factory_specs' => 'array',
         'frequency_files' => 'array',
         'impedance_files' => 'array',
-        'other_files' => 'array'
+        'other_files' => 'array',
+        'card_image' => 'array'
     ];
 
     public function creator(): BelongsTo

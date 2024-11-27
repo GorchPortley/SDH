@@ -16,12 +16,13 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('brand');
             $table->string('model');
+            $table->json('card_image');
             $table->string('tag')->nullable();
             $table->boolean('active')->default(false);
             $table->enum('category',
                 ['Subwoofer', 'Woofer', 'Tweeter', 'Compression Driver', 'Exciter', 'Other']);
             $table->integer('size');
-            $table->integer('impedance');
+            $table->string('impedance');
             $table->integer('power');
             $table->decimal('price', 8, 2)->default(0)->nullable();
             $table->string('link')->nullable();
