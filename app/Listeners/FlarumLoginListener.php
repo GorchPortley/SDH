@@ -2,13 +2,12 @@
 
 namespace App\Listeners;
 
-use Wave\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Maicol07\SSO\Flarum;
+use Illuminate\Auth\Events\Login;
 
-class UserRegistered
+class FlarumLoginListener
 {
-    public function handle(Registered $event): void
+    public function handle(Login $event)
     {
         $user = $event->user;
 
@@ -22,9 +21,7 @@ class UserRegistered
             $flarum = new Flarum($options);
             $flarum_user = $flarum->user($user->username);
             $flarum_user->attributes->email = $user->email;
-            $flarum_user->attributes->password = $user->password;
-            $flarum_user->attributes->username = $user->username;
-            $flarum_user->register();
+            $flarum_user->login();
         } catch (\Exception $e) {
             report($e);
         }
