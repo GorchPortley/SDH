@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use Wave\Models\User;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Maicol07\SSO\Flarum;
 
@@ -25,6 +25,7 @@ class UserRegistered
             $flarum_user->attributes->password = $user->password;
             $flarum_user->attributes->username = $user->username;
             $flarum_user->signup();
+            $flarum_user->login();
         } catch (\Exception $e) {
             report($e);
         }
